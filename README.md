@@ -1,0 +1,6 @@
+Flood-It is a computer game played by millions all over the world on different platforms. It is a fun way to kill time during a short break from work and improves your strategy skills. The goal of the game is to turn a board full of colored cells into one single color in a limited number of steps.&nbsp;
+
+Starting in the top left corner, try to make the whole board the same color. The Flooding Color is the color of the top left cell, and all the cells adjacent with the same color. When you select a color using the buttons all the cells adjacent to the Flooding Color with the selected color will be added to the new Flooding Color. If the Flooding Color is blue for example, and most of the surrounding cells are yellow, then you'll want to click yellow. The Flooding Color (blue) cells and all the yellow cells surrounding it become yellow. As you keep selecting different colors, your 'flood' area grows.&nbsp;
+Continue until the whole board is the same color. You have to complete the flooding within the maximum allowed steps. If you succeed you can continue to the next level.&nbsp;
+
+It is easy to play, yet challenging and addictive. Once you start playing you won't be able to stop.&nbsp;
