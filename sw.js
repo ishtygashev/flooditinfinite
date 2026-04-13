@@ -3,8 +3,8 @@ self.addEventListener('install', (e) => {
         caches.open('pwa-cache').then((cache) => {
             return cache.addAll([
                 '/flooditinfinite/',
-                'index.html',
-                'manifest.json'
+                '/flooditinfinite/index.html',
+                '/flooditinfinite/manifest.json'
             ]);
         })
     );
