@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <!-- Google tag (gtag.js) -->
@@ -12,18 +12,23 @@
     </script>
 
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-    <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#000000">
-    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <!--<link rel="icon" type="image/svg+xml" sizes="any" href="/favicon.svg">
+    <!--// Source - https://stackoverflow.com/a/62439564
+
+
+    <link rel="manifest" href='data:application/manifest+json,{"name":"SharePoint Title","short_name":"SP Title","description":"The one and only SharePoint Site Title program!","start_url":"index.html","icons":[{"src":"android-chrome-144x144.png","sizes":"144x144","type":"image/png"},{"src":"android-chrome-192x192.png","sizes":"192x192","type":"image/png"},{"src":"android-chrome-256x256.png","sizes":"256x256","type":"image/png"}],"background":"rgb(255,0,0)","theme_color":"rgb(255,255,255)","display":"standalone"}' />-->
     <!--https://favicon.io/favicon-converter/-->
     <!--https://jsobfuscator.com/-->
 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Flood It Infinite</title>
+
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#000000">
+    <link rel="apple-touch-icon" href="icon-192.png">
 
     <script>
         if ('serviceWorker' in navigator) {
@@ -42,402 +47,535 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 
     <style>
-        .dropdown-toggle::after {
-            display: none !important;
-        }
+         .dropdown-toggle::after {
+             display: none !important;
+         }
 
-        .dropdown-menu {
-            background: var(--card);
-            border: 2px solid var(--border);
-            border-radius: 14px;
-        }
+         .dropdown-menu {
+             background: var(--card);
+             border: 2px solid var(--border);
+             border-radius: 14px;
+         }
 
-            .dropdown-menu > a,
-            .dropdown-menu > li > a,
-            .dropdown-menu > li > .nav-link
-            .dropdown-menu > li > .dropdown-item {
-                line-height: 2rem;
-                font-family: "Montserrat", sans-serif;
-                font-weight: 400;
-                font-size: 1.0rem;
-                color: var(--muted);
-            }
-
-
-                .dropdown-menu > a:hover, .dropdown-menu > li > a:hover, .dropdown-menu > .active > a, .dropdown-menu > .active > a:hover, .dropdown-menu > .active > a:focus {
-                    background-color: var(--surface);
-                    color: var(--text);
-                    -webkit-box-shadow: none;
-                    box-shadow: none;
-                    background-image: none;
-                    text-shadow: none;
-                }
-
-        /* ── CSS Custom Properties (Design Tokens) ──────────────────────────────
-        All colours are defined here as variables so you only need to change
-        them in one place. Reference them anywhere with var(--name).          */
-        :root {
-            --bg: #0f1117; /* Page background — very dark navy              */
-            --surface: #181c27; /* Header / footer background — one step lighter */
-            --card: #1f2435; /* Game field & stat pill background              */
-            --border: #2c3350; /* Subtle border colour used throughout           */
-            --text: #e8eaf6; /* Primary text — soft white                      */
-            --muted: #6b728e; /* Secondary / dimmed text                        */
-            --accent: #5c6bc0; /* Indigo accent for icons and highlights          */
-            /* The six game button colours — swap these to retheme the buttons */
-            /*--c1: #ef5350;*/ /* Red    */
-            /*--c2: #42a5f5;*/ /* Blue   */
-            /*--c3: #66bb6a;*/ /* Green  */
-            /*--c4: #ffa726;*/ /* Orange */
-            /*--c5: #ab47bc;*/ /* Purple */
-            /*--c6: #26c6da;*/ /* Cyan   */
-
-            --maxfieldwidth: 640px;
-        }
-
-        /* ── Global Reset ───────────────────────────────────────────────────────
-        Ensures all elements include padding/border in their width (border-box)
-        and removes browser default margins and padding.                       */
-        *, *::before, *::after {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        /* ── Page Layout ────────────────────────────────────────────────────────
-        height: 100% makes the page fill the full viewport height.
-        display: flex + flex-direction: column stacks header / main / footer
-        vertically, allowing main to grow and push the footer to the bottom.  */
-        html, body {
-            height: 100%;
-            background: var(--bg);
-            color: var(--text);
-            font-family: 'Roboto', sans-serif;
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* ══════════ HEADER ══════════ */
-
-        /* Sticky top bar — uses --surface colour, separated from content by a
-        thin border. flex-shrink: 0 prevents it from shrinking when main grows. */
-        header {
-            background: var(--surface);
-            border-bottom: 1px solid var(--border);
-            padding: .7rem 1rem;
-            flex-shrink: 0;
-        }
+             .dropdown-menu > a,
+             .dropdown-menu > li > a,
+             .dropdown-menu > li > .nav-link
+             .dropdown-menu > li > .dropdown-item {
+                 line-height: 2rem;
+                 /*font-family: "Montserrat", sans-serif;*/
+                 font-weight: 400;
+                 font-size: 1.0rem;
+                 color: var(--muted);
+             }
 
 
+                 .dropdown-menu > a:hover, .dropdown-menu > li > a:hover, .dropdown-menu > .active > a, .dropdown-menu > .active > a:hover, .dropdown-menu > .active > a:focus {
+                     background-color: var(--surface);
+                     color: var(--text);
+                     -webkit-box-shadow: none;
+                     box-shadow: none;
+                     background-image: none;
+                     text-shadow: none;
+                 }
 
-            /* Centres the header content and caps it at 520 px wide.
-        flex + space-between pushes the title left and stats right.
-        flex-wrap: wrap lets them stack on very narrow screens.               */
-            header .inner {
-                max-width: var(--maxfieldwidth); /*520px;*/
-                margin: 0 auto;
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                /*justify-content: center !important;*/
-                flex-wrap: wrap;
-                gap: .4rem;
-            }
 
-        /* Game title text — extra bold with tight letter-spacing for impact.
-        flex + gap aligns the icon and text side by side.                     */
-        .game-title {
-            font-size: 1.35rem;
-            font-weight: 900;
-            letter-spacing: -.02em;
-            color: #fff;
-            display: flex;
-            align-items: center;
-            gap: .45rem;
-        }
+         /*  .popup {
+             background: var(--card);
+             border: 2px solid var(--border);
+             border-radius: 14px;
+             font-size: .82rem;
+             font-weight: 500;
+             letter-spacing: .03em;
+             color: var(--muted);
+         }
+             .popup > a {
+                 font-size: .82rem;
+                 font-weight: 500;
+                 letter-spacing: .03em;
+                 color: var(--muted);
+             }*/
 
-        @media (max-width : 767px) {
-            .game-title {
-                font-size: 1.05rem;
-            }
-        }
+         /* ── About Modal Overrides ───────────────────────────────────────────────
+        Bootstrap's modal uses light colours by default. These overrides theme
+        the dialog to match the dark game palette.                             */
 
-        /* Icon inside the title inherits the accent colour.                     */
-        .game-title i {
-            color: var(--accent);
-            font-size: 1.1rem;
-        }
+         /* Dark card background for the whole modal dialog box.                  */
+         #aboutModal .modal-content {
+             background: var(--card);
+             border: 1px solid var(--border);
+             border-radius: 14px; /* Matches the game field border-radius  */
+             color: var(--text);
+         }
 
-        /* Wrapper that groups the Level and Score stat pills together.          */
-        .stat-group {
-            display: flex;
-            gap: .75rem;
-            align-items: center;
-            justify-content: center !important;
-        }
+         /* Header strip inside the modal — slightly darker than the card body.   */
+         #aboutModal .modal-header {
+             background: var(--surface);
+             border-bottom: 1px solid var(--border);
+             border-radius: 13px 13px 0 0; /* Rounds only the top corners           */
+             padding: 1rem 1.25rem;
+         }
 
-        /* Individual stat pill — pill shape via border-radius: 20px.
-        Uses --card background and --border outline to match the field.       */
-        .stat {
-            display: flex;
-            align-items: center;
-            gap: .32rem;
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 20px; /* Makes it a rounded pill shape */
-            padding: .28rem .7rem;
-            font-size: .8rem;
-            font-weight: 500;
-        }
+         /* Modal title text — white and bold.                                    */
+         #aboutModal .modal-title {
+             font-weight: 700;
+             color: #fff;
+             display: flex;
+             align-items: center;
+             gap: .5rem;
+         }
 
-            /* Small icon inside each stat pill, dimmed with --muted.               */
-            .stat i {
-                font-size: .75rem;
-                color: var(--muted);
-            }
+             /* Accent-coloured icon in the modal title.                              */
+             #aboutModal .modal-title i {
+                 color: var(--accent);
+             }
 
-        /* The numeric value inside each stat — bold and right-aligned.
-        min-width stops the pill from jumping when the number changes width.  */
-        .stat-val {
-            font-weight: 700;
-            color: #fff;
-            min-width: 1.6ch;
-            text-align: right;
-        }
+         /* Override Bootstrap's default close button (×) colour for dark theme.  */
+         #aboutModal .close {
+             color: var(--muted);
+             opacity: 1;
+             text-shadow: none;
+         }
 
-        /* Specific colours for each stat value to distinguish them at a glance. */
-        #level-val {
-            color: #ffa726;
-        }
-        /* Orange for level  */
-        #score-val {
-            color: #66bb6a;
-        }
-        /* Green  for score  */
+             /* Brighten the close button on hover.                                   */
+             #aboutModal .close:hover {
+                 color: #fff;
+             }
 
-        /* ── Message Bar ────────────────────────────────────────────────────────
-        Sits below the stat row. min-height reserves space so the layout does
-        not jump when the message is empty.                                   */
-        .msg-bar {
-            max-width: var(--maxfieldwidth); /*520px;*/
-            margin: .45rem auto 0;
-            min-height: 1.5rem; /* Reserves vertical space even when empty */
-            text-align: center;
-        }
+         /* Modal body — standard padding and relaxed line-height for reading.    */
+         #aboutModal .modal-body {
+             padding: 1.4rem 1.25rem;
+             font-size: .9rem;
+             line-height: 1.7;
+             color: var(--muted);
+         }
 
-        /* The message text itself — smaller, dimmed by default.
-        Your JS can change the colour to signal success/error/info.           */
-        #message {
-            font-size: 1rem; /*.82rem;*/
-            font-weight: 500;
-            letter-spacing: .03em;
-            color: var(--muted);
-        }
+             /* Sub-headings inside the about text — accent colour, small caps style. */
+             #aboutModal .modal-body h6 {
+                 color: var(--accent);
+                 font-weight: 700;
+                 font-size: .78rem;
+                 letter-spacing: .08em;
+                 text-transform: uppercase;
+                 margin: 1rem 0 .35rem;
+             }
 
-        /* ══════════ MAIN ══════════ */
+                 /* First h6 needs no top margin as it starts at the top of the body.     */
+                 #aboutModal .modal-body h6:first-child {
+                     margin-top: 0;
+                 }
 
-        /* flex: 1 makes <main> expand to fill all remaining vertical space
-        between the header and footer. Inner flex centres the game-wrap.      */
-        main {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 1rem;
-        }
+             /* Paragraph text within the modal body.                                 */
+             #aboutModal .modal-body p {
+                 margin: 0 0 .5rem;
+             }
 
-        /* Centres and constrains the game area to 520 px.
-        flex-direction: column stacks the field above the button row.         */
-        .game-wrap {
-            width: 100%;
-            max-width: var(--maxfieldwidth); /*520px;*/
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1rem;
-        }
+         /* Version badge — small pill shown next to the game name in about text. */
+         #aboutModal .version-badge {
+             display: inline-block;
+             background: rgba(92,107,192,.2);
+             color: var(--accent);
+             font-size: .7rem;
+             font-weight: 700;
+             padding: .15rem .55rem;
+             border-radius: 20px;
+             margin-left: .4rem;
+             vertical-align: middle;
+         }
 
-        /* ── Square Game Field ──────────────────────────────────────────────────
-        .field-outer is a full-width relative container.
-        The ::before pseudo-element with padding-top: 100% is the classic CSS
-        intrinsic ratio trick — it forces the container to always be as tall
-        as it is wide, giving a perfect square at any screen size.            */
-        .field-outer {
-            width: 100%;
-            position: relative; /* Anchor for the absolutely positioned .game-field */
-        }
+         /* Footer strip of the modal — mirrors the modal header style.           */
+         #aboutModal .modal-footer {
+             background: var(--surface);
+             border-top: 1px solid var(--border);
+             border-radius: 0 0 13px 13px; /* Rounds only the bottom corners        */
+             padding: .75rem 1.25rem;
+         }
 
-            /* padding-top: 100% = 100% of the element's own width → perfect square. */
-            .field-outer::before {
-                content: '';
-                display: block;
-                padding-top: 100%; /* The intrinsic 1:1 ratio trick */
-            }
+         /* Close button inside the modal footer — accent-coloured CTA.          */
+         #aboutModal .btn-modal-close {
+             background: var(--accent);
+             color: #fff;
+             border: none;
+             border-radius: 8px;
+             padding: .45rem 1.4rem;
+             font-family: 'Roboto', sans-serif;
+             font-size: .85rem;
+             font-weight: 700;
+             cursor: pointer;
+             transition: background .15s;
+         }
 
-        /* The actual game field fills its parent completely via inset: 0
-        (shorthand for top/right/bottom/left: 0).
-        Replace the placeholder content inside here with your game canvas.    */
-        .game-field {
-            position: absolute;
-            inset: 0; /* Fills the .field-outer square exactly */
-            background: var(--card);
-            border: 2px solid var(--border);
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            gap: .6rem;
-        }
-
-            /* Large icon shown in the placeholder centre — dimmed to match border.  */
-            .game-field .placeholder-icon {
-                font-size: 3rem;
-                color: var(--border);
-            }
-
-            /* "GAME FIELD" label under the placeholder icon — small, muted, caps.   */
-            .game-field .placeholder-text {
-                font-size: .85rem;
-                font-weight: 500;
-                color: var(--muted);
-                letter-spacing: .05em;
-                text-transform: uppercase;
-            }
-
-        /* ── Color Button Row ───────────────────────────────────────────────────
-        CSS Grid with 6 equal columns auto-sizes each button to share the
-        available width responsively regardless of screen size.               */
-        .btn-row {
-            width: 100%;
-            display: grid;
-            grid-template-columns: repeat(6, 1fr); /* 6 equal-width columns */
-            gap: .5rem;
-        }
-
-        /* Base style for every colour button.
-        position: relative is required so the ::after hover overlay can be
-        positioned inside it. transition animates lift & shadow on hover.     */
-        .color-btn {
-            height: 44px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            position: relative; /* Needed for the ::after pseudo-element overlay */
-            transition: transform .13s, box-shadow .13s;
-            box-shadow: 0 3px 8px rgba(0,0,0,.4);
-            outline: none;
-        }
-
-            /* Invisible white overlay that fades in on hover to lighten the button.
-        Using ::after keeps it non-interactive and self-contained.            */
-            .color-btn::after {
-                content: '';
-                position: absolute;
-                inset: 0;
-                border-radius: 8px;
-                background: rgba(255,255,255,.13); /* Subtle white sheen */
-                opacity: 0;
-                transition: opacity .15s;
-            }
-
-            /* Show the white sheen overlay when hovering.                           */
-            .color-btn:hover::after {
-                opacity: 1;
-            }
-
-            /* Lift the button upward and deepen its shadow on hover.               */
-            .color-btn:hover {
-                transform: translateY(-3px);
-                box-shadow: 0 7px 18px rgba(0,0,0,.45);
-            }
-
-            /* Snap the button back to its resting position on click (active state). */
-            .color-btn:active {
-                transform: translateY(0);
-            }
-
-        /* Each button's background colour is set via its data-color attribute.
-        Change --c1 through --c6 in :root above to retheme all buttons.      */
-        /*  .color-btn[data-color="c1"] {
-                background: var(--c1);
-            }
-
-            .color-btn[data-color="c2"] {
-                background: var(--c2);
-            }
-
-            .color-btn[data-color="c3"] {
-                background: var(--c3);
-            }
-
-            .color-btn[data-color="c4"] {
-                background: var(--c4);
-            }
-
-            .color-btn[data-color="c5"] {
-                background: var(--c5);
-            }
-
-            .color-btn[data-color="c6"] {
-                background: var(--c6);
-            }*/
-
-        /* ══════════ FOOTER ══════════ */
-
-        /* Mirrors the header style — same --surface background and matching
-        border on the opposite side. flex-shrink: 0 keeps it pinned to the
-        bottom when main expands to fill vertical space.                      */
-        footer {
-            background: var(--surface);
-            border-top: 1px solid var(--border);
-            padding: .6rem 1rem;
-            text-align: center;
-            flex-shrink: 0;
-        }
-
-            /* Small, dimmed copyright text.                                         */
-            footer p {
-                font-size: .73rem;
-                color: var(--muted);
-                margin: 0;
-            }
-
-            /* Tiny side margins on inline icons inside the footer text.             */
-            footer i {
-                margin: 0 .2rem;
-            }
+             /* Slightly lighter accent on hover.                                     */
+             #aboutModal .btn-modal-close:hover {
+                 background: #7986cb;
+             }
 
 
 
-        .wave-overlay {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            width: 10px;
-            height: 10px;
-            background-color: rgba(0, 255, 0, 0.5); /* Green wave */
-            border-radius: 50%;
-            transform: translate(-50%, -50%) scale(0) rotate(0deg);
-            pointer-events: none;
-            z-index: 9999;
-        }
+         /* ── CSS Custom Properties (Design Tokens) ──────────────────────────────
+         All colours are defined here as variables so you only need to change
+         them in one place. Reference them anywhere with var(--name).          */
+         :root {
+             --bg: #0f1117; /* Page background — very dark navy              */
+             --surface: #181c27; /* Header / footer background — one step lighter */
+             --card: #1f2435; /* Game field & stat pill background              */
+             --border: #2c3350; /* Subtle border colour used throughout           */
+             --text: #e8eaf6; /* Primary text — soft white                      */
+             --muted: #6b728e; /* Secondary / dimmed text                        */
+             --accent: #5c6bc0; /* Indigo accent for icons and highlights          */
+             /* The six game button colours — swap these to retheme the buttons */
+             /*--c1: #ef5350;*/ /* Red    */
+             /*--c2: #42a5f5;*/ /* Blue   */
+             /*--c3: #66bb6a;*/ /* Green  */
+             /*--c4: #ffa726;*/ /* Orange */
+             /*--c5: #ab47bc;*/ /* Purple */
+             /*--c6: #26c6da;*/ /* Cyan   */
 
-        .wave-active {
-            animation: waveEffect 0.8s ease-in-out;
-        }
+             --maxfieldwidth: 640px;
+         }
 
-        @keyframes waveEffect {
-            0% {
-                transform: /*translate(-50%, -50%) */ scale(0) rotate(0deg);
-                opacity: 1;
-            }
+         /* ── Global Reset ───────────────────────────────────────────────────────
+         Ensures all elements include padding/border in their width (border-box)
+         and removes browser default margins and padding.                       */
+         *, *::before, *::after {
+             box-sizing: border-box;
+             margin: 0;
+             padding: 0;
+         }
 
-            100% {
-                transform: /*translate(-50%, -50%) */ scale(10) rotate(720deg);
-                opacity: 0;
-            }
-        }
+         /* ── Page Layout ────────────────────────────────────────────────────────
+         height: 100% makes the page fill the full viewport height.
+         display: flex + flex-direction: column stacks header / main / footer
+         vertically, allowing main to grow and push the footer to the bottom.  */
+         html, body {
+             height: 100%;
+             background: var(--bg);
+             color: var(--text);
+             font-family: 'Roboto', sans-serif;
+             display: flex;
+             flex-direction: column;
+         }
+
+         /* ══════════ HEADER ══════════ */
+
+         /* Sticky top bar — uses --surface colour, separated from content by a
+         thin border. flex-shrink: 0 prevents it from shrinking when main grows. */
+         header {
+             background: var(--surface);
+             border-bottom: 1px solid var(--border);
+             padding: .7rem 1rem;
+             flex-shrink: 0;
+         }
+
+
+
+             /* Centres the header content and caps it at 520 px wide.
+         flex + space-between pushes the title left and stats right.
+         flex-wrap: wrap lets them stack on very narrow screens.               */
+             header .inner {
+                 max-width: var(--maxfieldwidth); /*520px;*/
+                 margin: 0 auto;
+                 display: flex;
+                 align-items: center;
+                 justify-content: space-between;
+                 /*justify-content: center !important;*/
+                 flex-wrap: wrap;
+                 gap: .4rem;
+             }
+
+         /* Game title text — extra bold with tight letter-spacing for impact.
+         flex + gap aligns the icon and text side by side.                     */
+         .game-title {
+             font-size: 1.35rem;
+             font-weight: 900;
+             letter-spacing: -.02em;
+             color: #fff;
+             display: flex;
+             align-items: center;
+             gap: .45rem;
+         }
+
+         @media (max-width : 767px) {
+             .game-title {
+                 font-size: 1.05rem;
+             }
+         }
+
+         /* Icon inside the title inherits the accent colour.                     */
+         .game-title i {
+             color: var(--accent);
+             font-size: 1.1rem;
+         }
+
+         /* Wrapper that groups the Level and Score stat pills together.          */
+         .stat-group {
+             display: flex;
+             gap: .75rem;
+             align-items: center;
+             justify-content: center !important;
+         }
+
+         /* Individual stat pill — pill shape via border-radius: 20px.
+         Uses --card background and --border outline to match the field.       */
+         .stat {
+             display: flex;
+             align-items: center;
+             gap: .32rem;
+             background: var(--card);
+             border: 1px solid var(--border);
+             border-radius: 20px; /* Makes it a rounded pill shape */
+             padding: .28rem .7rem;
+             font-size: .8rem;
+             font-weight: 500;
+         }
+
+             /* Small icon inside each stat pill, dimmed with --muted.               */
+             .stat i {
+                 font-size: .75rem;
+                 color: var(--muted);
+             }
+
+         /* The numeric value inside each stat — bold and right-aligned.
+         min-width stops the pill from jumping when the number changes width.  */
+         .stat-val {
+             font-weight: 700;
+             color: #fff;
+             min-width: 1.6ch;
+             text-align: right;
+         }
+
+         /* Specific colours for each stat value to distinguish them at a glance. */
+         #level-val {
+             color: #ffa726;
+         }
+         /* Orange for level  */
+         #score-val {
+             color: #66bb6a;
+         }
+         /* Green  for score  */
+
+         /* ── Message Bar ────────────────────────────────────────────────────────
+         Sits below the stat row. min-height reserves space so the layout does
+         not jump when the message is empty.                                   */
+         .msg-bar {
+             max-width: var(--maxfieldwidth); /*520px;*/
+             margin: .45rem auto 0;
+             min-height: 1.5rem; /* Reserves vertical space even when empty */
+             text-align: center;
+         }
+
+         /* The message text itself — smaller, dimmed by default.
+         Your JS can change the colour to signal success/error/info.           */
+         #message {
+             font-size: 1rem; /*.82rem;*/
+             font-weight: 500;
+             letter-spacing: .03em;
+             color: var(--muted);
+         }
+
+         /* ══════════ MAIN ══════════ */
+
+         /* flex: 1 makes <main> expand to fill all remaining vertical space
+         between the header and footer. Inner flex centres the game-wrap.      */
+         main {
+             flex: 1;
+             display: flex;
+             align-items: center;
+             justify-content: center;
+             padding: 1rem;
+         }
+
+         /* Centres and constrains the game area to 520 px.
+         flex-direction: column stacks the field above the button row.         */
+         .game-wrap {
+             width: 100%;
+             max-width: var(--maxfieldwidth); /*520px;*/
+             display: flex;
+             flex-direction: column;
+             align-items: center;
+             gap: 1rem;
+         }
+
+         /* ── Square Game Field ──────────────────────────────────────────────────
+         .field-outer is a full-width relative container.
+         The ::before pseudo-element with padding-top: 100% is the classic CSS
+         intrinsic ratio trick — it forces the container to always be as tall
+         as it is wide, giving a perfect square at any screen size.            */
+         .field-outer {
+             width: 100%;
+             position: relative; /* Anchor for the absolutely positioned .game-field */
+         }
+
+             /* padding-top: 100% = 100% of the element's own width → perfect square. */
+             .field-outer::before {
+                 content: '';
+                 display: block;
+                 padding-top: 100%; /* The intrinsic 1:1 ratio trick */
+             }
+
+         /* The actual game field fills its parent completely via inset: 0
+         (shorthand for top/right/bottom/left: 0).
+         Replace the placeholder content inside here with your game canvas.    */
+         .game-field {
+             position: absolute;
+             inset: 0; /* Fills the .field-outer square exactly */
+             background: var(--card);
+             border: 2px solid var(--border);
+             border-radius: 14px;
+             display: flex;
+             align-items: center;
+             justify-content: center;
+             flex-direction: column;
+             gap: .6rem;
+         }
+
+             /* Large icon shown in the placeholder centre — dimmed to match border.  */
+             .game-field .placeholder-icon {
+                 font-size: 3rem;
+                 color: var(--border);
+             }
+
+             /* "GAME FIELD" label under the placeholder icon — small, muted, caps.   */
+             .game-field .placeholder-text {
+                 font-size: .85rem;
+                 font-weight: 500;
+                 color: var(--muted);
+                 letter-spacing: .05em;
+                 text-transform: uppercase;
+             }
+
+         /* ── Color Button Row ───────────────────────────────────────────────────
+         CSS Grid with 6 equal columns auto-sizes each button to share the
+         available width responsively regardless of screen size.               */
+         .btn-row {
+             width: 100%;
+             display: grid;
+             grid-template-columns: repeat(6, 1fr); /* 6 equal-width columns */
+             gap: .5rem;
+         }
+
+         /* Base style for every colour button.
+         position: relative is required so the ::after hover overlay can be
+         positioned inside it. transition animates lift & shadow on hover.     */
+         .color-btn {
+             height: 44px;
+             border: none;
+             border-radius: 8px;
+             cursor: pointer;
+             position: relative; /* Needed for the ::after pseudo-element overlay */
+             transition: transform .13s, box-shadow .13s;
+             box-shadow: 0 3px 8px rgba(0,0,0,.4);
+             outline: none;
+         }
+
+             /* Invisible white overlay that fades in on hover to lighten the button.
+         Using ::after keeps it non-interactive and self-contained.            */
+             .color-btn::after {
+                 content: '';
+                 position: absolute;
+                 inset: 0;
+                 border-radius: 8px;
+                 background: rgba(255,255,255,.13); /* Subtle white sheen */
+                 opacity: 0;
+                 transition: opacity .15s;
+             }
+
+             /* Show the white sheen overlay when hovering.                           */
+             .color-btn:hover::after {
+                 opacity: 1;
+             }
+
+             /* Lift the button upward and deepen its shadow on hover.               */
+             .color-btn:hover {
+                 transform: translateY(-3px);
+                 box-shadow: 0 7px 18px rgba(0,0,0,.45);
+             }
+
+             /* Snap the button back to its resting position on click (active state). */
+             .color-btn:active {
+                 transform: translateY(0);
+             }
+
+         /* Each button's background colour is set via its data-color attribute.
+         Change --c1 through --c6 in :root above to retheme all buttons.      */
+         /*  .color-btn[data-color="c1"] {
+                 background: var(--c1);
+             }
+
+             .color-btn[data-color="c2"] {
+                 background: var(--c2);
+             }
+
+             .color-btn[data-color="c3"] {
+                 background: var(--c3);
+             }
+
+             .color-btn[data-color="c4"] {
+                 background: var(--c4);
+             }
+
+             .color-btn[data-color="c5"] {
+                 background: var(--c5);
+             }
+
+             .color-btn[data-color="c6"] {
+                 background: var(--c6);
+             }*/
+
+         /* ══════════ FOOTER ══════════ */
+
+         /* Mirrors the header style — same --surface background and matching
+         border on the opposite side. flex-shrink: 0 keeps it pinned to the
+         bottom when main expands to fill vertical space.                      */
+         footer {
+             background: var(--surface);
+             border-top: 1px solid var(--border);
+             padding: .6rem 1rem;
+             text-align: center;
+             flex-shrink: 0;
+         }
+
+             /* Small, dimmed copyright text.                                         */
+             footer p {
+                 font-size: .73rem;
+                 color: var(--muted);
+                 margin: 0;
+             }
+
+             /* Tiny side margins on inline icons inside the footer text.             */
+             footer i {
+                 margin: 0 .2rem;
+             }
+
+
+
+         .wave-overlay {
+             position: fixed;
+             top: 50%;
+             left: 50%;
+             width: 10px;
+             height: 10px;
+             background-color: rgba(0, 255, 0, 0.5); /* Green wave */
+             border-radius: 50%;
+             transform: translate(-50%, -50%) scale(0) rotate(0deg);
+             pointer-events: none;
+             z-index: 9999;
+         }
+
+         .wave-active {
+             animation: waveEffect 0.8s ease-in-out;
+         }
+
+         @keyframes waveEffect {
+             0% {
+                 transform: /*translate(-50%, -50%) */ scale(0) rotate(0deg);
+                 opacity: 1;
+             }
+
+             100% {
+                 transform: /*translate(-50%, -50%) */ scale(10) rotate(720deg);
+                 opacity: 0;
+             }
+         }
     </style>
 </head>
 <body>
@@ -450,7 +588,9 @@
                     <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-th"></i></a>
 
                     <div class="dropdown-menu " aria-labelledby="dropdownMenuLink">
-                        <a class="dropdown-item" id="level-reset" href="#">Reset</a>
+                        <a class="dropdown-item" id="level-reset" href="#">Restart level</a>
+                        <a class="dropdown-item" id="game-reset" href="#">Restart game</a>
+                        <a class="dropdown-item" id="about" href="#">About</a>
                         <!--<a class="dropdown-item" href="#">Another action</a>
                         <a class="dropdown-item" href="#">Something else here</a>-->
                     </div>
@@ -507,14 +647,7 @@
                 <!--<button class="color-btn" data-color="6" title="Color 6"></button>-->
             </div>
 
-            <!--<div class="buttons row">
-                <div class="col-2"><button data-color="0" class="btn">Color </button></div>
-                <div class="col-2"><button data-color="1" class="btn">Color </button></div>
-                <div class="col-2"><button data-color="2" class="btn">Color </button></div>
-                <div class="col-2"><button data-color="3" class="btn">Color </button></div>
-                <div class="col-2"><button data-color="4" class="btn">Color </button></div>
-                <div class="col-2"><button data-color="5" class="btn">Color </button></div>
-            </div>-->
+
 
         </div>
     </main>
@@ -528,6 +661,148 @@
         </p>
     </footer>
 
+    <div class="modal fade" id="modal-about" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered ">
+            <div class="modal-content p-0 popup">
+                <div class="modal-body p-0">
+                    <a type="button" href="javascript:closeAbout();" class="game-title" style="float: right;" aria-label1="Close"><span aria-hidden="true">&times;</span><!--<i class="fas fa-th"></i>--></a>
+
+                    <div class="container">
+                        <div class="col text-left">
+                            <h4>About Flood It!</h4>
+                            <p>
+                                Flood-It is a computer game played by millions all over the world on different platforms. It is a fun way to kill time during a short break from work and improves your strategy skills. The goal of the game is to turn a board full of colored cells into one single color in a limited number of steps. <a href="javascript:closeAbout();">Close</a>
+                            </p>
+                            <h4>How to play</h4>
+                            <p>Starting in the top left corner, try to make the whole board the same color. The Flooding Color is the color of the top left cell, and all the cells adjacent with the same color. When you select a color using the buttons all the cells adjacent to the Flooding Color with the selected color will be added to the new Flooding Color. If the Flooding Color is blue for example, and most of the surrounding cells are yellow, then you'll want to click yellow. The Flooding Color (blue) cells and all the yellow cells surrounding it become yellow. As you keep selecting different colors, your 'flood' area grows.</p><p>
+                                Continue until the whole board is the same color. You have to complete the flooding within the maximum allowed steps. If you succeed you can continue to the next level. <a href="javascript:closeAbout();">Close</a>
+                            </p>
+                            <!--<h2>Privacy Notice</h2>
+                            <p>We use Google Analytics to better understand how users interact with our App. This service provides anonymous information about device like screen size, operating system etc. We use this information to improve your experience when using our App. Please click <a href="https//:www.google.com/analytics/learn/privacy.html">here</a> to learn more about this service.</p>
+                            <p>Ads in our Apps may be served by third party ad networks, which may collect device identifiers or use cookies or other technologies to collect information in connection with ad serving.</p>
+                            <p><a href="javascript:closeAbout();">Close</a></p>-->
+                            <h4>Credits</h4>
+                            <p>Thanks to:</p>
+                            <ul>
+                                <li>My son Eugene for giving me insight into gaming, ideas, discussions and support during development</li>
+                                <li><a href="https://StackOverflow.com" target="_blank">StackOverflow.com</a> for allways ready answers to any question you can ask</li>
+
+                            </ul>
+                            <p><a href="javascript:close();">Close</a></p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ══════════ ABOUT MODAL ══════════
+     Bootstrap 4 modal dialog structure:
+     .modal          — the invisible full-screen backdrop container
+     .modal-dialog   — centres and sizes the dialog box
+     .modal-content  — the visible white (themed) box
+     .modal-header   — title bar with close button
+     .modal-body     — scrollable content area
+     .modal-footer   — action buttons row
+     data-backdrop="true"  — clicking outside closes the modal
+     data-keyboard="true"  — pressing Esc closes the modal           -->
+    <div class="modal fade" id="aboutModal" tabindex="-1" role="dialog"
+         aria-labelledby="aboutModalLabel" aria-modal="true"
+         data-backdrop="true" data-keyboard="true">
+
+        <!-- modal-dialog centres the box; modal-dialog-centered vertically centres it -->
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h5 class="modal-title" id="aboutModalLabel">
+                        <i class="fas fa-th"></i> About Flood It Infinite
+                    </h5>
+                    <!-- data-dismiss="modal" tells Bootstrap to close the modal on click -->
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <!-- Modal Body — replace the placeholder text below with your own content -->
+                <div class="modal-body">
+
+                    <h6><i class="fas fa-star mr-1"></i> Stats</h6>
+                    <p>
+
+                        <strong style="color:#fff;">Game played</strong>
+                        <span class="version-badge" id="games-stat"></span>
+                        <strong style="color:#fff;">Level</strong>
+                        <span class="version-badge" id="level-stat"></span>
+
+                    </p>
+
+                    <h6><i class="fas fa-list-ul mr-1"></i> How to Play</h6>
+                    <p>
+                        Starting in the top left corner, try to make the whole board the same color.
+                        The <strong style="color:#fff;">Flooding Color</strong> is the color of the top left cell,
+                        and all the cells adjacent to it with the same color. When you select a color using
+                        the buttons, all the cells adjacent to the Flooding Color with the selected color will
+                        be added to the new Flooding Color.
+                    </p>
+                    <p>
+                        If the Flooding Color is blue for example, and most of the surrounding cells are yellow,
+                        then you'll want to click yellow. The blue cells and all the yellow cells surrounding
+                        them become the new Flooding Color. As you keep selecting different colors, your
+                        'flood' area grows.
+                    </p>
+                    <p>
+                        Continue until the whole board is the same color. You have to complete the flooding
+                        within the maximum allowed steps. If you succeed you can continue to the next level.
+                    </p>
+
+                    <h6><i class="fas fa-info-circle mr-1"></i> About Flood It!</h6>
+                    <p>
+                        Flood-It is a computer game played by millions all over the world on different
+                        platforms. It is a fun way to pass the time during a break from work and improves
+                        your strategy skills. The goal of the game is to turn a board full of colored cells
+                        into one single color in a limited number of steps. It is easy to play, yet
+                        challenging and addictive. Once you start playing you won't be able to stop.
+                    </p>
+                    <p>
+                        Follow us on X &nbsp;
+                        <a href="https://x.com/FloodItInfinite" target="_blank" style="color:var(--accent);">
+                            @FloodItInfinite
+                        </a>.
+                        Please tweet your results with the hashtag
+                        <strong style="color:#fff;">#FloodItInfinite</strong>!
+                    </p>
+
+
+                    <h6><i class="fas fa-heart mr-1"></i> Credits</h6>
+                    <p>Thanks to:</p>
+                    <ul style="color:var(--muted); padding-left:1.2rem; line-height:2;">
+                        <li>
+                            My son <strong style="color:#fff;">Eugene</strong> for giving me insight into
+                            gaming, ideas, discussions and support during development
+                        </li>
+                        <li>
+                            Stack Overflow for always-ready answers to any question you can ask
+                        </li>
+                        <li>App Store for hosting the game for so long</li>
+                        <li>Claude for design</li>
+                    </ul>
+
+                </div><!-- /.modal-body -->
+                <!-- Modal Footer -->
+                <div class="modal-footer">
+                    <!-- data-dismiss="modal" closes the modal when this button is clicked -->
+                    <button type="button" class="btn-modal-close" data-dismiss="modal">
+                        <i class="fas fa-times mr-1"></i> Close
+                    </button>
+                </div>
+
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
@@ -537,8 +812,11 @@
     <script type="text/javascript" src="https://github.com/niklasvh/html2canvas/releases/download/0.4.1/html2canvas.js"></script>
     <script>
 
-        const _0x3adb = ['WPygvSo+', 'uIFdGmoYCq', 'v8kXWRGmWRW', 'WRZcICkTWQ8/', 'ssxdR8kOh8oGBW', 'W6fBnCoCba', 'eCk/w3tcGq', 'm8k5W58IW5y', 'W5iJouqJ', 'W77dTgXEW6y', 'W4aIja', 'vtDLWOOEW6xdISoGFmoqWPK', 'WOBdUmo3W5lcRa', 'WRNdP8oWW7JcIa', 'WO9UWQFcLfu', 'ACoOeSooW4y', 'WOWKW4DZia', 'WRX2W40mWQ4', 'rSo7kW', 'vX3cJCoWca', 'juvaw8ku', 'WO4HW4LBfG', 'xCo6W5e+nW', 'WQZdUCo1W5JcRa', 'WORdPCkK', 'qbZdPH9q', 'WOmTW5HZiG', 'eCkJW7KEda', 'WPtdJuRdIby', 'WPX8W40pWQ8', 'wb3cHa', 'WQNdV8omW5VcKG', 'kSo7W4hcTMu', 'W4L7WQ8jWPe', 'WPb3WOexWRq', 'WO7dL0vlWOu', 'WRBdNWWPxq', 'FSkfAIby', 'DCoIf1FcJq', 'WOW8W5y', 'WROIW43cV2K', 'rJFdM8o0sW', 'ohBdNari', 'hfXdW7VcIq', 'WO/cGwVdShK', 'WRRcLmk/WO/cJW', 'amkaW4megW', 'WPL1W44mWRG', 'wSkRwtrp', 'C1BdL0f3', 'WR7dQYi1xa', 'wmkGwtLs', 'WP/cOXJcUG8', 'Bb3dUthcHG', 'c3FdSX5r', 'yCo9W7S4', 'W4NcOxTNWQO', 'WOJdU8opW7/cRG', 'sCoWW67cTd0', 'FmoQf8onW60', 'eSkdW78Fdq', 'CtFdMqvK', 'oCkZW5FdJM4', 'dSoAW6xcI0O', 'e8oJW7SIh1ldLW', 'WO7cGSkLWOGj', 'fCkSW7SE', 'WRhcOfpdHSks', 'ttv6jSks', 'lfn0W4CY', 'oI3dKmko', 'WPFdG8oeegu', 'WPJcSaFcSvy', 'WQNcSmkAWORcQa', 'zCoTW54W', 'bhv9CCkr', 'ruNdLwLJ', 'fSogW4FcPxe', 'WP7cIg/dUMe', 'WOFdLuC', 'WOC1xCocDG', 'WQxdNYq3WOa', 'WQqxC8o9vG', 'ouTnW6RcIa', 'EZq1WOin', 'W4T2hSopkq', 'dWS1W4fq', 'tsHs', 'hNH0W7ah', 'W7hcI8kVemoS', 'sCoPaSofW6m', 'WPqbw8oYxa', 'lGtdLCobBHBcHG', 'WRJdKW4kta', 'a1TPW4u', 'bgtdPCoEcq', 'BrtdOHZcJq', 'scndnCkB', 'WQW/WQW2hq', 'fw0eW5Hf', 'x8oskCo5W5e', 'DeZdKmoPW60', 'WQtdMYOFWOm', 'WQCnWRaMpa', 'qsPFh8k5', 'hCkWWR7cGCoSxSkIWOhdU8k3ASoxW4i', 'vmkyhZSP', 'W6NdNujjW7y', 'WPVdMvnPWOm', 'sSoSW6FdMCk/', 'W57cI0bUWOG', 'FrZdJCoN', 'smo2aConW74', 'ofquFCks', 'tr4lWO4G', 'lSoxW77cL28', 'WRddLJ8Mqq', 'WRtdQa8xrq', 'bcvApCkh', 'rWBcGSoXca', 'Ac/dMd7cUa', 'umodW7Goaq', 'WOFdM2LRWOS', 'WPTNBGeTqfddQCoaAq', 'WQ7cGmkPWRxcLq', 'W5eZmLi/', 'FbRdJCoWAW', 'FHhdH8ogCG', 'kmoQW4/cUgS', 'urLzW7VcKW', 'WOVcRM7dVhi', 'xSkrhJm5', 'ofT+W4u7', 'iuH2W4yP', 'WR7cRKBdImkg', 'W4iem2qX', 'WR7dVXKyWPW', 'WQ/cPL/dHG', 'FbtdJCo1zq', 'qCo/WR8tWRK', 'WOmNW5XfoG', 'W47cTSo+W5BcSW', 'Fc7dICk0W6u', 'WOpdUCoRW4q', 'WPJcN2VdT2i', 'leBdVabp', 'wWtcHG', 'WPJcMNpdT8kp', 'nqpdV8knla', 'buRdK8k0sbtdV8kVmCkHsCkh', 'vmoAW4aUnW', 'umkOpaKe', 'n05cE8kt', 'WQVcNSkOWQK', 'W5hcJSkIhSo0', 'W6ldPMnQ', 'WONdLeHhWRm', 'hCktW67dJ2e', 'W5ieEq', 'W7LzWQ3dTmkx', 'k8kPW6FdRgi', 'W41KWQtdOmk6', 'ovDP', 'W7BdNaiJtq', 'meXBDCke', 'bLXg', 'nmorW6ZcKfe', 'WOpdTLpdVHu', 'W6NdGgz2W48', 'BJBdK8orrq', 'i3ddRMXhW4iO', 'aCkOW6uCW7W', 'yd3dUd/cQG', 'taBdGmowtq', 'umkChZGX', 'smoIW7i', 'dCksBftcNa', 'W4xcQSklbSoE', 'W5uHe1OZ', 'WOSCESo/DW', 'gmk+htu+', 'DHjzkmk+', 'EfxdJKTG', 'u8kRwJjA', 'W7JcI2fGW5tdPmk0pd1evNS', 'kSk0W67dONS', 'r8o9nKBcLa', 'sSoXW6qNdG', 'FH7cGW', 'WQhdTM5WWOa', 'WPFdJ1hdQW0', 'EhddTwfN', 'Bb7dICoqvW', 'W6XBka', 'emkgW7uEhq', 'saeKWPO', 'iuPqtmkd', 'WRGJW4/cV3q', 'W4XBWQxdQ8kF', 'gNL8W5bd', 'WPW+WRSQhq', 'WRFdSKldLqG', 'l8k3W63dOM0', 'W6ZcONHNWRW', 'vh3dQLPH', 'W6tcLSkIdSol', 'hSk/W4eBda', 'W6TgnCokba', 'a01uW6ZcKq', 'vCkwkqyi', 'lCo1W5C', 'kv51W54H', 'Duvsl8ot', 'bSkIwhZcJq', 'WQRdNZuaWOi', 'WPjNBWrImNhdP8okxSk/W78', 'tSoTaSokW7W', 'WQ0ZWPCG', 'WRvVWRtcNvm', 'WRVdNZW2WOK', 'aMGZW4bF', 'i8obW6dcJgu', 'gSkAW70ZbG', 'vSo7mLxcIW', 'dNeMW4nz', 'zK7dIKf4', 'WPegq8o1', 'WRjHW7C', 'rSktWQq', 'WO/cTG/cUh0', 'wtyvWQuB', 'W6fSWRCfWRi', 'W6epEmocbq', 'jgOKW59B', 'W590WQ3dQq', 'WO3dLK9kWOm', 'xJVdTttcGq', 'phbXW4FcVW', 'WRNcLXyKqG', 's8ohW5aybG', 'WO4AW4fejq', 'W4BcLSkvlSoM', 'WQZdTISkFq', 'xCkiqsNdGq', 'wmoYW6hdLmkU', 'rSoKW48Ula', 'oKHZW7FcHa', 'vZjqpSks', 'b00uW6LC', 'zqmFWOqo', 'lNT9W7K3', 'qCoWeCooW6q', 'eeLyDG', 'W5H5WQtdOSk7', 'CHVcJ8oV', 'WRddJSo9oM0', 'a1HVW6Sx', 'iePyW5NcLq', 'wSoHW7hcKHu', 'dwRdVbDs', 'fLvAW7hcLW', 'WQ7dRmo1W53cRq', 'WO4SW4Pviq', 'W6dcRSknjmop', 'W4CGouqa', 'i1DSW5q/', 'xbW8WOam', 'EHxdKIbL', 'WRyPW58', 'vSo7h0lcIq', 's8o2W7y3ba', 'WPj4W5KUWRm', 'EXddMddcJG', 'aCk5BMBcMG', 'WRhcRLhdGmkj', 'WPtdJuRdIaa', 'WRNdN8o7eq', 'oLddJqro', 'WQmKW5xcR38', 'wqSXWRiN', 'W4n4WQ06WRy', 'eNq+W5Py', 'WRrLWRFcI1O', 'w8kIqHPF', 'WOVcRGFcUKW', 'ASoypCoLW6i', 'WOhdOSolW5lcVq', 'WQG5WPq0mq', 'FbFdJbNcGa', 'WRFcK8k1WQa', 'WQCBxCo7vG', 'WOSRWQOLvq', 'rSoFi3FcTa', 'W7Taa8oqaG', 'gtddVCkVaW', 'W6nMWPNdJSke', 'm29cF8ks', 'W4a5mfKO', 'D3ZdGvXR', 'WR3cNSkWWQeA', 'WONcU23dNuC', 'WOpcMhBdPwi', 'WQddTgnpWRa', 'hCk+yrdcImklWODyWQtcTq', 'cdJdVmkEea', 'wXNdUrS', 'W59IWRe', 'WO7dMvq', 'msdcHCkYWQ3cPIDHDSozW4CY', 'C8ojcuZcIa', 'W6vdWRldLCk6', 'pmoEW7pcLHW', 'f2m5W5TA', 'rmoZW7mnpa', 'WRNdLJCMWOK', 'WPuNW7FcSM8', 'ttxcRCo6nq', 'WPhdI03dOt0', 'WPPLWQ7cL00', 'WRRdIJ47WPG', 'W5TKbSodaa', 'WQZcJSkIWQK', 'zmo7W7S7hq', 'tSkkpJa0', 'WOdcIhtdShS', 'WPddNh7cPwS', 'lmksW6ZdVxW', 'W4RcHhP4WRS', 'WQ7cKatcRMG', 'WRpcGSkUWQNcIG', 'W55dWQ4dWOC', 'EZ7dGG8', 'wr3dRGC', 'WOBcGMVdUW', 'WRRdJJmGWPG', 'nghcTq', 'WOBdNWWGtq', 'WO7dLfrPWPG', 'WRBcPfldISkp', 'gCkoW6G9bG', 'cvVdItfn', 'vsBdVmkzea', 'W4fiaCoLpa', 'WOmmW7lcOMa', 'xmoZaSoFW7i', 'jmk0W7tdQhO', 'WO7dRt4kWOG', 'wmoxW6hdKSkV', 'WO/cIg7dUwq', 'WPddJWGUqa', 'CJBdKWrI', 'W718WQm2WRW', 'sCoAeCooW7K', 'eCk4W6SDW6y', 'jKfzW54+', 'jvnDECkX', 'WPVcQ3ddT0e', 'WPyWwSoXDG', 'CXRdHa', 'v8kZeZes', 'aMe+W59F', 'bhFdQrDo', 'lezI', 'kKldHGrT', 'W4OYzG', 'DxBdL8oVW70', 'vmk+aZmx', 'W6Ldp8olaG', 'WR7cPKVdHW', 'mLzrW47cGa', 'W4NdL0jkW7C', 'wGSG', 'bSkIW74E', 'WO1/W5COWQ8', 'g2H3W67cLW', 'W5XjWQVdJCkj', 'WPeBwmoIBG', 'vCoYW7u2kW', 'WOJdOmo6W5VcSW', 'lvT0W5u', 'B8oWc8oeW6u', 'WP/dT0RdKd4', 'WQxdSvrDWRW', 'WRpdLG8QsG', 'peXFW5/cRW', 'WOSCg8k5mG', 'eg1QW4m8', 'BWe9WOar', 'n0rqx8kw', 'WPZdV8oJW5i', 'WRNcI8k3WQpcGG', 'WRrLWRtcNuW', 'bxpdPZ9n', 'o3HjW6KW', 'bKNdUXnw', 'rLddJCocW7a', 'dguQW75d', 'oSo1WQldJMu', 'dSkOW70vW6S', 'aCkZrwBcQW', 'WQ/cU0ddJCke', 'q8oJpeJcMW', 'WQP+WQpcIKS', 'W4WGoq', 'WRtdLSoXhCkk', 'uCkomJmW', 'WPzQW6imWRe', 'WR0TW41I', 'WPWJWQqH', 'W4JcIrmw', 'WRRcO0RdJmkt', 'W7TwWQmJWR8', 'CeNdN216', 'WRldVqO9rG', 'W5RcKSo8', 'WO3dPmo8W5BcTq', 'W4VcJ8kOW5nA', 'xrhdOCoxqq', 'DLxdLefH', 'W6pcJCkXpCot', 'yYNdNWHJ', 'W5RcTCkLg8oM', 'zNtdMSoQW6S', 'smo1pf7cKa', 'qCo9W7S4pa', 'WRdcKSkSWRZcKW', 'WPFdRtmTqa', 'WPldLCo1fgq', 'EbhdTXy', 'WQJdNJyxWPO', 'xColW5/cHa', 'ymowi8oYW40', 'AmoMkCo6W6m', 'WOWMWRCNeW', 'oCozW67cIL0', 'ubjqpmkd', 'W6nSWRyNWR8', 'W4iRW4f6iq', 'WPSDWOKqeW', 'W4r7WQurWOa', 'WO8oqCoDDq', 'c35zW6aq', 'sSoJia', 'fwSnW6W', 'WRRcLcVcP2m', 'WO3cRaVcRq', 'mmoMW4RcPMK', 'j8kIW5JdSW', 'zNtdMSoQW70', 'c8obW43cRL8', 'WR3dNYOMWQ8', 'jLX9', 'qHFcKa', 'WOFdK05aWQy', 'Ef/dI11Y', 'Ev/dJKT/', 'bxVdSt1a', 'j8kJW5JdTa', 'WRldMW0GaW', 'AYBdL8oICa', 'WOTFWOVcK04', 'wmomW6hdHCkV', 'WQitWOCxka', 'b8kbW7FdU28', 'kNDSW5q9', 'a8keW58ZW6a', 'WO3cP8kKWPCy', 'q8obW4ddPSkT', 'gmkkW6qvdq', 'WRjPWPVcJ1G', 'WQqKW4hcVW', 'eSkZsvFcHa', 'WPRdGeVdGWG', 'WOWLWReVeq', 'WOFcLCoorxu', 'WOFdN1zaWP0', 'omo1W4JcRfq', 'WOBdJNRdUa', 'tCoxbCoMW5a', 'ihngFmk0', 'WQBcUaFcNKy', 'Et7dGs13', 'WOVcMSkY', 'WRBcTmkYWQBcLW', 'WOhdGc8mxW', 'mSoJW6FcR0O', 'zcVdMGnI', 'ubvbmCkd', 'xYFcTmoAba', 'u1pdLei', 'fmk4s3pcMW', 'yXb7vSkvWOZcMSkI', 'WOtcPXJcUK4', 'WOddLX4IWOe', 'WQP/WQdcLvy', 'W4X8WPX3EW', 'WOJcPv/dR8ka', 'WQ3cVCkTWPub', 'WQNcJYdcSvS', 'CSotW67cRry', 'gfHBW7RcIq', 'W6VdSfX1W70', 'wCkzfr8Y', 'Cmkeva10', 'W65EWQBdVSkY', 'WOKWWPeheW', 'WOVcMKJdOeC', 'jutdVbD0', 'DSowWQW', 'ctNdQSkymW', 'W48lW4j/lq', 'WOaJW4Xfja', 'WPZdRvruWR4', 'WOhcOc/cJ1S', 'EtFcJCoVhW', 'WOVcPWlcS1e', 'WOWNW4f9jW', 't8o6c8ohW6q', 'W6qYk2yw', 't8oLjCoAW4a', 'WQeavCo/Aa', 'W4JcJCkLWOOD', 'ASo9dCo7W5G', 'xmohW6tcKHW', 'WR7cPCkzWOJcTq', 'W4DDWO0o', 'WPOBW5JcV0W', 'uCkHxW', 'W5JdHHzzW4q', 'cxBdUZDu', 't8oRhW', 'WQxdSXO7WOa', 'a8k+tgVcJa', 'DmogW7NcPbS', 'WQuNW7xcQ1q', 'a8kZtG', 'WO8gv8odCW', 'WQtcQu7dP0q', 'l8kYW67dOvS', 'WO14CG', 'Ev/dJeT3', 'W5XcWPVdH8kr', 'WP5PW7KzWP8', 'WPiIDCobDG', 's8kucZK', 'W4pcQhPVWRO', 'WPNcNeldKCkn', 'W4H5WRK', 'W79dnCoqfq', 'eYFdNmk9bG', 'W6PcnCokba', 'WOpdS8oVW5lcSG', 'W6XapSoxba', 'WOBcSHRcJNC', 'WRddIqaRWQ4', 'W4/dN0TiW7a', 'uHVcJ8oVlW', 'WQ/dQgrXWRS', 'AmosW57dKSko', 'ndhdR8kpgq', 'W57dOvPhW7a', 'C1xdIMTY', 'WQRdNZ4+WP8', 'W4y4ouq', 'DSoCW7/cLd4', 'scnBn8kd', 'WOW9W4jInW', 'WRZcHSk2WRRcHW', 'ECoEW7NcJWS', 'eCk5sNW', 'WRu/W57cU3e', 'tSkNvXa', 'W6RcJgqWWO4', 'vInbjCkf', 'WRvLWQu', 'W513aCo2aq', 'W47dNvLi', 'nvrBAmoi', 'WPOSW4S', 'W7dcH8k3oCot', 'xmkQstbn', 'aCkKW6mebq', 'nSoXW4/cPwO', 'WPn2W5m', 'pfTGW5q', 'DcvFj8kg', 'WRRcICkSWOdcJW', 'l8kqW4/dUu8', 'BYpdTCo2uq', 'lSkcWQddL07dQmoKWQSuxdPTfG', 'WQq9W5FcS24', 'rSktWQqmxW', 'fdhdR8kpgq', 'BahdGSoXCa', 'qmoToK7cTW', 'WQJcG0ZdKmkv', 'hvHEW7VcQa', 'AqTNoCkZ', 'daLjWQ/cMq', 'DCkQfZSe', 'W6r9iSoTjW', 'Cd7dGI96', 'C03dGCoTW5e', 'WOlcIhxdKNy', 'pCo8W4VcR0m', 'WOJdN0XjWOi', 'DdRdMbX3', 'jmkyW5GraW', 'WOldUCoVW5lcRq', 'W7JdG3rkW5e', 'W4DIWQy', 'saHGeCk1', 'oKvcF8km', 'dCk7W6WcWQe', 'sW8+WPeG', 'w8omW4BdRSkR', 's8oLW7ZdTCk0', 'W5Lehmoxjq', 'FhtdQLrj', 'FSoFW47cRIa', 'AHtdVr/cMq', 'CCkRwXbx', 'n0TCW7O', 'CHtdM8ooAW', 'ffL9FG', 'v8o4W7iGcG', 'AsSKWQW6', 'WOxcGCk/WPqi', 's2zwp8kz', 'hu1zuCkh', 'p0VcUKRdM8kdWQSZq3xcPG', 'WRdcQLpdHSkn', 'tmkCeZa4', 'WQiPW4NcN3C', 'xGS+WPSv', 'tSoLW6/dN8k1', 'WR3dJ8oEgq', 'waeHWRup', 'WOPiWPlcOKC', 'W4xdMuX1W64', 'qaSLWPep', 'W6zTWRqQ', 'WRxcJmkVWQxcIa', 'oCk3W6FdUwW', 'WQ7cQWlcSW', 'WQqrW7TubG', 'wHBdPans', 'WQxcJ8k6', 'FmoaW7pcGq0', 'WOJdG8ogahK', 'WONdS2PVWOS', 'WPXMWO5viG', 'mN0KW4Tl', 'jCk+W7tdQgu', 'b8kGW6WEW7S', 'WQxdL8o2smkjrmoxWQ/cGCkbWOu', 'rb4yWQuG', 'EbtdJSoMrW', 'cwldRX5B', 'j8kEW64cW6m', 'WRBcHmkZW6ZcKG', 'WQikW6hcJvi', 'W6X2W7e', 'WRpdRfHaWQy', 'W4BdL1HdW6G', 'WRqOW5FcTMK', 'WRT+WQW0WQpcLSki', 'WOWMWR83cW', 'tSk6sbTE', 'DdtdMb5/', 'WQXjnSofrW', 'WQhcO8kUWQGi', 's8oXW7eG', 'gCkaW6udda', 'z8oAW7tcJXG', 'CJxdGIz/', 'WQiPW54', 'WOGVWQObfa', 't8oHW6BdGmk6', 'WONdUSo2W5JcRa', 'W4eow8kKlq', 'W4jJW7O', 'd2r8BmkN', 'Fr3dVG', 'WPqksG', 'WPBdOSoheM0', 'xSoHW6BdKSk0', 'mY3cJmk3WQhcOZTYtSofW5GX', 'W4ZcUwW', 'tCo7a8oOW7G', 'W71MWRuSWRC', 'W6PFWOBdNmkl', 'nmoLW5dcSfi', 'W4j7p1K2', 'sSoZcmoeW7m', 'bmoYW7mYcW', 'sZbqiSoz', 'W47cN3TAWQu', 'rSoCW7uzka', 'xXOQWPGg', 'W6fApCoNhW', 'rmovkM3cHW', 'W47dPhDqW7a', 'WQldLmoAjxa', 'WPZcN23dOxG', 'qxhdRKLJ', 'l08MW4TH', 'ycNdTYv4', 'W61LWO3dVSku', 'zdldJa8', 'W4hcUuzTWQ0', 'vmkNfW4C', 'jfJdUqbY', 'zrunkmoyW7/cICkrW5eKWRhdGq', 'WRldNXqrrW', 'WO4kt8o1DG', 'W6PNWRqoWRO', 'W6mXWORcPIO', 'WPHTW4aeWOm', 'f2eH', 'b8kgW6Ov', 'AbFdOHJcGa', 'WQZcK8kuWQNcKa', 'hZhdRCkOgG', 'bmoYW7uYda', 'vGavWP47', 'lmkJW7ldPhS', 'WOdcOdNcSxe', 'W7RdH15aW74', 'FbddJ8oVDW', 'xW/dUYy', 'WOTdWQFcMMy', 'lmkeW63dU2W', 'xXOYWOyx', 'nGZcJKXX', 'qIPAp8kt', 'W6uXWOVcPIS', 'BSoLW4VdPSky', 'WQZcHSkDWOqu', 'iSkAW43cVKi', 'zmoKW6tdJSkC', 'gmkkW6yvbq', 'uXFcL8ogea', 'WONdUerMWR4', 'W41HWQ7dO8k6', 'emkAvhZcJq', 'WQ/cG8k7WRxcOa', 'bmk0W64aW4S', 'WOJdG8ogiwa', 'W7ddGCkXWQlcGa', 'vCo1W7KWaa', 'h0TO', 'WPBdICoeehO', 'WOBdJMldQJa', 'bmk3W7S8W4y', 'yXNdOXFcHq', 'umkVvtHu', 'WRRdGKFdQGO', 'gSk6tG', 'WRu4W4/cRNu', 'fgX1C8k1', 'wb3cKCoW', 'g2KNW6bu', 'DGWRWQeh', 'D8kZjqO6', 'CmoZW57cSa8', 'FGXheSkh', 'WPZdPSo1W57cQG', 'W6DopSoaha', 'nSkxW6qEW5S', 'WP7dJKi', 'WR5OWPVcK0C', 'n8o/W5BcK1m', 'W4ZdNKfjW6a', 'juLoFW', 'WOZdS8o1W5VcRq', 'fSoXW5q', 'CN3dM8oHW7W', 'W7T7WQeHWRy', 'B8obhwZcNq', 'WQNdRmouW7tcKW', 'xSoPW6W', 'xw7cRG4u', 'WPhdHeNdIXC', 'AWZdJ8oM', 'eWxdM8kAbW', 'lmorW43cG1y', 'oKvsBG', 'm3zBuSkW', 'yMRdKmoKW7i', 'DYnznCku', 'kenuW6yG', 'bhnqs8kn', 'W4HOWQ3dOmkT', 'rSo4W4pcJbO', 'WQ/cGM7dUMu', 'WOxdI0hdSqC', 'mmkwW54Hhq', 'WR9MWQ3cL1S', 'WOldTwJdOci', 'ESksW7tcKHW', 'WR/cQKNdJ8ks', 'W5DFDSoCB3tdMMi', 'vmoGW5SXgq', 'mYldJCkpaq']; const _0x40a883 = _0x24a4; (function (_0x4534cd, _0x526b14) { const _0x21e565 = _0x24a4; while (!![]) { try { const _0x13feab = -parseInt(_0x21e565(0x3d7, 'SmxQ')) + -parseInt(_0x21e565(0x2cc, 'a08p')) + -parseInt(_0x21e565(0x208, 'dyQ(')) * -parseInt(_0x21e565(0x3bd, 'B8C%')) + -parseInt(_0x21e565(0x382, '#AE9')) * parseInt(_0x21e565(0x419, 'B8C%')) + parseInt(_0x21e565(0x293, 'cvSh')) + -parseInt(_0x21e565(0x3ec, 'PTCx')) * parseInt(_0x21e565(0x2ac, 'Dk%u')) + -parseInt(_0x21e565(0x3ab, 'yRJS')) * -parseInt(_0x21e565(0x39e, 'cmn3')); if (_0x13feab === _0x526b14) break; else _0x4534cd['push'](_0x4534cd['shift']()); } catch (_0xc476eb) { _0x4534cd['push'](_0x4534cd['shift']()); } } }(_0x3adb, 0x5aadf)); const _0x12fc48 = function () { const _0x4168c8 = _0x24a4, _0x2f4aae = { 'gbYkx': function (_0x2e0ba4, _0x418661) { return _0x2e0ba4 === _0x418661; }, 'usECI': _0x4168c8(0x47e, 'SmxQ'), 'qkevB': _0x4168c8(0x200, '^#Is'), 'Syvxg': _0x4168c8(0x344, ')mMd') + _0x4168c8(0x3a1, 'CiSz') + _0x4168c8(0x4e0, 'V]UV'), 'fuUAL': function (_0x32390b) { return _0x32390b(); }, 'aRoRk': function (_0x128f5f, _0x46cb9b) { return _0x128f5f + _0x46cb9b; }, 'BWShn': function (_0x4dbc80, _0x509e55) { return _0x4dbc80 + _0x509e55; }, 'gqNWs': function (_0x497757, _0x28c11d) { return _0x497757 + _0x28c11d; }, 'TjzLa': _0x4168c8(0x24c, 'CiSz') + '\x20', 'UJAKm': _0x4168c8(0x226, 'V]UV') + _0x4168c8(0x1f1, 'Nb[n') + ':\x20', 'NNsYd': '\x20move' + _0x4168c8(0x4cf, '5#b#') + 'ick\x20t' + _0x4168c8(0x291, '0UXn') + 'tinue' + _0x4168c8(0x238, 'B8C%'), 'ZJrBp': function (_0x5e801f, _0x5b98b5, _0x5b61c8, _0xab3547) { return _0x5e801f(_0x5b98b5, _0x5b61c8, _0xab3547); }, 'FbjPO': 'level', 'JLNUq': function (_0x250407, _0x327c29, _0x105631) { return _0x250407(_0x327c29, _0x105631); }, 'gVdgA': 'mouse' + 'down', 'LjuZD': function (_0x2c9df6, _0x56f631) { return _0x2c9df6 - _0x56f631; }, 'aZyJx': function (_0x4cb35f, _0x3133b8) { return _0x4cb35f / _0x3133b8; }, 'ssicQ': function (_0x3c553f, _0x27a38d) { return _0x3c553f !== _0x27a38d; }, 'YAVfY': _0x4168c8(0x457, 'ht[S'), 'czBqW': _0x4168c8(0x2f4, 'yyQ5') }; let _0x3633db = !![]; return function (_0x5dd18d, _0x17b52d) { const _0xc70881 = _0x4168c8, _0x4d1af5 = { 'znFjX': function (_0x2c3b2d, _0x2dd370) { const _0x37f6a3 = _0x24a4; return _0x2f4aae[_0x37f6a3(0x442, 'mzz]')](_0x2c3b2d, _0x2dd370); }, 'eVoHP': function (_0x58940e, _0x3b184d) { const _0x16c43a = _0x24a4; return _0x2f4aae[_0x16c43a(0x2da, '0mty')](_0x58940e, _0x3b184d); } }; if (_0x2f4aae[_0xc70881(0x4a5, 'dyQ(')](_0x2f4aae['YAVfY'], _0x2f4aae[_0xc70881(0x224, '(hEz')])) { const _0x27b3e7 = _0x3633db ? function () { const _0x38af4b = _0xc70881; if (_0x17b52d) { if (_0x2f4aae[_0x38af4b(0x320, 'd9#K')](_0x2f4aae['usECI'], _0x2f4aae[_0x38af4b(0x362, 'k1il')])) { function _0x5e9fee() { const _0x22c69b = _0x38af4b, _0x1ae87a = _0x38e682[_0x22c69b(0x377, 'cvSh') + 'undin' + _0x22c69b(0x3c4, '2cY2') + _0x22c69b(0x2e3, '#Dbn') + 't'](), _0x242c3e = _0x4d1af5[_0x22c69b(0x358, '#AE9')](_0x3e2965['clien' + 'tX'], _0x1ae87a[_0x22c69b(0x330, 'dyQ(')]), _0x469d30 = _0x4d1af5[_0x22c69b(0x2f2, 's$qC')](_0x591f82['clien' + 'tY'], _0x1ae87a[_0x22c69b(0x474, '][()')]), _0x5ba1bb = _0x4d1af5[_0x22c69b(0x331, 'dyQ(')](_0x1f4289['clien' + 'tWidt' + 'h'], this[_0x22c69b(0x45d, 'wgx$')][_0x22c69b(0x265, 'mzz]')]), _0xdec709 = _0x58b179[_0x22c69b(0x42d, '(9zh')](_0x4d1af5[_0x22c69b(0x46e, '2cY2')](_0x242c3e, _0x5ba1bb)), _0x3cb05c = _0x1d1a5d[_0x22c69b(0x4b1, '$Bna')](_0x4d1af5['eVoHP'](_0x469d30, _0x5ba1bb)); this[_0x22c69b(0x41a, '(hEz')] ? this['break'] = ![] : this[_0x22c69b(0x271, 'DR9H') + _0x22c69b(0x4d5, 'B8C%')](this[_0x22c69b(0x37e, 'Nb[n')][_0x22c69b(0x33e, 'x1o9')][_0x3cb05c][_0xdec709]); } } else { const _0x40f580 = _0x17b52d[_0x38af4b(0x2af, 'ht[S')](_0x5dd18d, arguments); return _0x17b52d = null, _0x40f580; } } } : function () { }; return _0x3633db = ![], _0x27b3e7; } else { function _0x4272af() { const _0xed9023 = _0xc70881, _0x520270 = _0x2f4aae[_0xed9023(0x2a9, '0Ta%')][_0xed9023(0x481, 'cIA3')]('|'); let _0x61ea22 = 0x0; while (!![]) { switch (_0x520270[_0x61ea22++]) { case '0': this[_0xed9023(0x26d, 'CiSz')]++; continue; case '1': _0x2f4aae['fuUAL'](_0x5920ad); continue; case '2': this['break'] = !![]; continue; case '3': _0x43b4c0[_0xed9023(0x34e, 'R6hL') + _0xed9023(0x22a, '7zlP')] = _0x2f4aae[_0xed9023(0x2d6, '#Dbn')](_0x2f4aae[_0xed9023(0x432, 'Y)xy')](_0x2f4aae[_0xed9023(0x3c9, 'B8C%')](_0x2f4aae[_0xed9023(0x3b7, '9%h1')](_0x2f4aae[_0xed9023(0x4ec, '9%h1')](_0x2f4aae[_0xed9023(0x334, 'mzz]')](_0x2f4aae[_0xed9023(0x20d, 'x1o9')], this[_0xed9023(0x486, '2cY2')]), _0x2f4aae[_0xed9023(0x381, 'k1il')]), this['flood'][_0xed9023(0x4c9, 'd9#K')]), '/'), this['flood']['maxMo' + 'ves']), _0x2f4aae[_0xed9023(0x478, '][()')]); continue; case '4': _0x2f4aae[_0xed9023(0x31b, '0UXn')](_0xa17c9c, _0x2f4aae[_0xed9023(0x227, '(hEz')], this[_0xed9023(0x2aa, '5#b#')], 0x1e); continue; case '5': _0x2f4aae[_0xed9023(0x3ff, '(9zh')](_0x3aaf48, 0x1, this['level']); continue; case '6': _0x37f325['addEv' + _0xed9023(0x375, 'wgx$') + _0xed9023(0x439, '0UXn') + 'r'](_0x2f4aae[_0xed9023(0x408, '][()')], _0x5c153e => this[_0xed9023(0x211, 'DR9H') + 'eInpu' + 't'](_0x5c153e, this), { 'once': !![] }); continue; }break; } } } }; }(), _0x2c697f = _0x12fc48(this, function () { const _0x1ce927 = _0x24a4, _0x1c1c87 = { 'mVowZ': _0x1ce927(0x290, 'V]UV') + _0x1ce927(0x4b6, ')mMd'), 'DRDTJ': _0x1ce927(0x3fd, '#AE9') + 'ge', 'ONTVg': function (_0x318549, _0x4bc883) { return _0x318549(_0x4bc883); }, 'uebFD': function (_0x472756, _0x2bae77) { return _0x472756 + _0x2bae77; }, 'lNUAB': function (_0x442cb9, _0x1dc0f5) { return _0x442cb9 + _0x1dc0f5; }, 'aigMX': _0x1ce927(0x25a, '0UXn') + _0x1ce927(0x42a, '$Bna') + 'nctio' + 'n()\x20', 'DUVTn': _0x1ce927(0x409, '0Ta%') + 'nstru' + _0x1ce927(0x25e, 'dyQ(') + '\x22retu' + 'rn\x20th' + _0x1ce927(0x4c3, 'O3gn') + '\x20)', 'NDPNw': function (_0x254df0) { return _0x254df0(); }, 'TFBxb': function (_0xce9228, _0x47d0fd) { return _0xce9228 === _0x47d0fd; }, 'NKtxM': _0x1ce927(0x431, '#AE9'), 'aIgHd': _0x1ce927(0x4a8, 'cmn3'), 'gwJuP': _0x1ce927(0x384, ')mMd'), 'dCSHC': 'info', 'golCF': 'error', 'cegRn': _0x1ce927(0x445, 'ht[S') + _0x1ce927(0x342, 'O3gn'), 'fzrLI': _0x1ce927(0x295, 'o)(L'), 'MJyxO': _0x1ce927(0x327, '7zlP'), 'uXFQx': function (_0x8a18ea, _0x3ec561) { return _0x8a18ea < _0x3ec561; } }; let _0xdf0d62; try { const _0x37f294 = _0x1c1c87[_0x1ce927(0x319, 'o)(L')](Function, _0x1c1c87[_0x1ce927(0x459, 's$qC')](_0x1c1c87[_0x1ce927(0x280, '0UXn')](_0x1c1c87[_0x1ce927(0x357, 'Y)xy')], _0x1c1c87[_0x1ce927(0x3d5, 'x1o9')]), ');')); _0xdf0d62 = _0x1c1c87['NDPNw'](_0x37f294); } catch (_0x3e1f4f) { if (_0x1c1c87[_0x1ce927(0x34b, '20#*')](_0x1c1c87[_0x1ce927(0x2df, '0Ta%')], _0x1c1c87[_0x1ce927(0x4c0, '(9zh')])) _0xdf0d62 = window; else { function _0x41aadc() { const _0x50249b = _0x1ce927; _0xde7dd9['remov' + _0x50249b(0x4a2, '(hEz') + _0x50249b(0x1ea, 'yRJS') + _0x50249b(0x250, 'B8C%')](_0x1c1c87[_0x50249b(0x4bf, 'BKRQ')], _0x573e8e['handl' + _0x50249b(0x488, '5#b#') + 't']); const _0xf26feb = _0x3b5620[_0x50249b(0x260, 'Dk%u') + 'ement' + 'ById'](_0x1c1c87[_0x50249b(0x24a, '(9zh')]); _0xf26feb['inner' + _0x50249b(0x2f7, '$D]7')] = '', _0x17642e[_0x50249b(0x3f9, 'wgx$') + 'me'](); } } } const _0x2cf8b5 = _0xdf0d62[_0x1ce927(0x3c0, 'cmn3') + 'le'] = _0xdf0d62['conso' + 'le'] || {}, _0x12d0c4 = [_0x1c1c87[_0x1ce927(0x43c, 'mzz]')], _0x1c1c87[_0x1ce927(0x217, '2cY2')], _0x1c1c87['dCSHC'], _0x1c1c87['golCF'], _0x1c1c87[_0x1ce927(0x418, 'cIA3')], _0x1c1c87[_0x1ce927(0x30f, ')mMd')], _0x1c1c87[_0x1ce927(0x214, 'wgx$')]]; for (let _0xbbef97 = 0x0; _0x1c1c87[_0x1ce927(0x428, 's$qC')](_0xbbef97, _0x12d0c4[_0x1ce927(0x3ac, 'o)(L') + 'h']); _0xbbef97++) { const _0x5149dc = _0x12fc48[_0x1ce927(0x245, '$Bna') + _0x1ce927(0x4a1, '7zlP') + 'r'][_0x1ce927(0x44c, 's$qC') + _0x1ce927(0x3db, '^#Is')][_0x1ce927(0x4b2, 'x1o9')](_0x12fc48), _0x3424b2 = _0x12d0c4[_0xbbef97], _0x3f897e = _0x2cf8b5[_0x3424b2] || _0x5149dc; _0x5149dc['__pro' + _0x1ce927(0x4fd, '0Ta%')] = _0x12fc48[_0x1ce927(0x3b1, 'cmn3')](_0x12fc48), _0x5149dc['toStr' + _0x1ce927(0x399, '0UXn')] = _0x3f897e[_0x1ce927(0x453, '!#XP') + 'ing']['bind'](_0x3f897e), _0x2cf8b5[_0x3424b2] = _0x5149dc; } }); _0x2c697f(); class Flood { constructor(_0x58d66f, _0x465432) { const _0x1993a1 = _0x24a4, _0x21286a = { 'uKstl': '2|3|4' + _0x1993a1(0x3d0, 'a08p') + '5|0' }, _0x12400f = _0x21286a[_0x1993a1(0x262, 'Nb[n')][_0x1993a1(0x203, '$D]7')]('|'); let _0x979186 = 0x0; while (!![]) { switch (_0x12400f[_0x979186++]) { case '0': this[_0x1993a1(0x39f, '9%h1') + _0x1993a1(0x340, '#AE9') + 'el'] = 0x5; continue; case '1': this[_0x1993a1(0x28c, 'cmn3') + _0x1993a1(0x2c8, 'cvSh')] = 0x19; continue; case '2': this[_0x1993a1(0x424, 'O3gn')] = _0x58d66f; continue; case '3': this[_0x1993a1(0x2d9, '$Bna') + _0x1993a1(0x3d1, 'R6hL')] = _0x465432; continue; case '4': this[_0x1993a1(0x235, 'O3gn') + 'ze'] = 0x6; continue; case '5': this[_0x1993a1(0x3b2, '(hEz') + 'culty'] = 0x1; continue; case '6': this['minOb' + _0x1993a1(0x2ef, '^#Is') + 'el'] = 0x3; continue; }break; } } [_0x40a883(0x1fe, '$D]7') + 'me'](_0x28046c) { const _0x1626bb = _0x40a883, _0x4f254a = { 'uGZWH': function (_0x3104d9, _0x11966f) { return _0x3104d9 + _0x11966f; }, 'pcsLr': function (_0x23fc22, _0xfcddf4) { return _0x23fc22 > _0xfcddf4; }, 'tTelt': function (_0x5882b6, _0x4ac401) { return _0x5882b6 * _0x4ac401; }, 'aIVCo': function (_0x30e681, _0x2206ed) { return _0x30e681 > _0x2206ed; }, 'Vdelj': function (_0xd5a3be, _0x1402a3) { return _0xd5a3be === _0x1402a3; }, 'sMNRF': _0x1626bb(0x2a2, 'Y)xy'), 'muWGy': _0x1626bb(0x216, '5$xj'), 'vSrfT': function (_0x40b6e0, _0x21d510) { return _0x40b6e0 + _0x21d510; }, 'oAuYU': function (_0x2aea90, _0x5ea242) { return _0x2aea90 !== _0x5ea242; }, 'vwOli': _0x1626bb(0x395, 'DR9H'), 'VFZkw': function (_0x4d9ec0, _0x2c02f1) { return _0x4d9ec0 * _0x2c02f1; } }; this[_0x1626bb(0x30d, 'agg!')] = 0x0, this[_0x1626bb(0x294, 'x1o9')] = _0x28046c, this[_0x1626bb(0x4b4, '20#*')] = [], this[_0x1626bb(0x4ee, 'cvSh')] = _0x4f254a[_0x1626bb(0x2b2, 'C2Mi')](this[_0x1626bb(0x244, 'R6hL')], this['minSi' + 'ze']); if (_0x4f254a[_0x1626bb(0x3ae, '(9zh')](this[_0x1626bb(0x1f8, '(9zh')], 0x64)) this[_0x1626bb(0x451, 'yIt7') + _0x1626bb(0x414, 'k1il')] = Math[_0x1626bb(0x2c4, 'R6hL')](_0x4f254a[_0x1626bb(0x3b5, 'k1il')](_0x4f254a[_0x1626bb(0x4f5, '0UXn')](this[_0x1626bb(0x1e4, 'PTCx')], 0.25), 0x54)); else { if (_0x4f254a[_0x1626bb(0x1ee, ')mMd')](this[_0x1626bb(0x41c, 'd9#K')], 0x32)) { if (_0x4f254a[_0x1626bb(0x350, 'd9#K')](_0x4f254a[_0x1626bb(0x3a6, '(hEz')], _0x4f254a['muWGy'])) { function _0x38ab3b() { _0x5d45ea ? _0x1f1f0e++ : _0x5a6c98++; } } else this[_0x1626bb(0x4ce, '0Ta%') + 'ves'] = Math[_0x1626bb(0x255, 'C4Fl')](_0x4f254a['vSrfT'](_0x4f254a['tTelt'](this['level'], 0.85), 0x12)); } else { if (_0x4f254a[_0x1626bb(0x496, 'ht[S')](this['level'], 0x19)) this[_0x1626bb(0x495, 'Nb[n') + _0x1626bb(0x1e1, 'SmxQ')] = Math[_0x1626bb(0x446, 'DR9H')](_0x4f254a['vSrfT'](_0x4f254a[_0x1626bb(0x3a7, 'a08p')](this[_0x1626bb(0x2e8, 'O3gn')], 0.95), 0xf)); else { if (_0x4f254a['oAuYU'](_0x4f254a[_0x1626bb(0x3f4, 'B8C%')], _0x4f254a[_0x1626bb(0x485, 'o)(L')])) { function _0x591b1b() { _0x5762fa[_0x2cf510][_0x4fbeff] = _0x206f11; } } else this[_0x1626bb(0x210, 'C4Fl') + _0x1626bb(0x3e4, 'mzz]')] = Math[_0x1626bb(0x4e8, 'a08p')](_0x4f254a[_0x1626bb(0x1fc, 'dyQ(')](_0x4f254a[_0x1626bb(0x477, '0mty')](this[_0x1626bb(0x44b, 'mzz]')], 1.1), 0xb)); } } } this[_0x1626bb(0x251, 'C4Fl') + 'rid'](), this[_0x1626bb(0x4ba, 'O3gn') + _0x1626bb(0x480, 'd9#K')] = this[_0x1626bb(0x324, 'R6hL')][0x0][0x0]; } ['initG' + _0x40a883(0x32a, 'yRJS')]() { const _0x48d4fc = _0x40a883, _0x24f304 = { 'kHxCY': function (_0x2a4006, _0x14c3b7) { return _0x2a4006 < _0x14c3b7; }, 'AGRtr': function (_0x1480e3, _0x427c99) { return _0x1480e3 < _0x427c99; }, 'ZznOy': function (_0x4e1e58, _0x3703de) { return _0x4e1e58 !== _0x3703de; }, 'xhboa': function (_0x4f992b, _0x310afc) { return _0x4f992b !== _0x310afc; }, 'bnLiZ': _0x48d4fc(0x3a4, '5$xj') + _0x48d4fc(0x3b3, 'dyQ(') + _0x48d4fc(0x219, 'C4Fl'), 'Feqel': _0x48d4fc(0x2fd, 'C2Mi') + _0x48d4fc(0x1e6, 'k1il'), 'wAiCq': function (_0x424af5) { return _0x424af5(); }, 'ctLTJ': 'Game\x20' + _0x48d4fc(0x2d5, '0UXn') + _0x48d4fc(0x3f6, 'o)(L') + 'k\x20to\x20' + _0x48d4fc(0x2ba, '$D]7') + 'nue..' + '.', 'eJAhb': function (_0x328e40, _0x4617a9, _0x2db547) { return _0x328e40(_0x4617a9, _0x2db547); }, 'ZbxUd': _0x48d4fc(0x2be, 'Nb[n') + _0x48d4fc(0x25d, '20#*'), 'Lqmxe': _0x48d4fc(0x26c, 'Nb[n') + _0x48d4fc(0x273, 'DR9H') + _0x48d4fc(0x2b3, 'd9#K'), 'phUCg': function (_0x1fe75e, _0x11f17d) { return _0x1fe75e + _0x11f17d; }, 'oNbmO': function (_0x47ee7f, _0x4c7b47) { return _0x47ee7f - _0x4c7b47; }, 'sUthH': function (_0x544eb9, _0x134c7b) { return _0x544eb9 < _0x134c7b; }, 'QtVRY': function (_0x5e4319, _0x10a3e3) { return _0x5e4319 < _0x10a3e3; }, 'MWfgY': function (_0x83c9a, _0x50b3d6) { return _0x83c9a >= _0x50b3d6; }, 'ESgrl': function (_0x402cd0, _0x127fe1) { return _0x402cd0 - _0x127fe1; }, 'TKVgp': function (_0x413c85, _0x52c736) { return _0x413c85 !== _0x52c736; }, 'esgCi': function (_0x336764, _0x11f9cd) { return _0x336764 < _0x11f9cd; }, 'oAHPv': function (_0x5c54d4, _0x5797a6) { return _0x5c54d4 * _0x5797a6; }, 'EtdkL': function (_0x271f01, _0x502b95) { return _0x271f01 === _0x502b95; }, 'avfSG': _0x48d4fc(0x462, 'cvSh'), 'VBxTD': _0x48d4fc(0x2e5, 'ht[S'), 'PQinx': function (_0x390e00, _0x4146e6) { return _0x390e00 < _0x4146e6; }, 'HkXBZ': function (_0x2529ec, _0x44a969) { return _0x2529ec === _0x44a969; }, 'qWvYq': _0x48d4fc(0x441, 'agg!'), 'mkXZU': _0x48d4fc(0x4fe, 'yyQ5'), 'apXzC': function (_0x16caf0, _0x4f1aa4) { return _0x16caf0 > _0x4f1aa4; }, 'QJnAT': function (_0x384cc7, _0x48ea93) { return _0x384cc7 < _0x48ea93; }, 'hpKQC': function (_0x525c15, _0x3c00a9) { return _0x525c15 === _0x3c00a9; }, 'tWWTk': function (_0x85bb69, _0x505ba5) { return _0x85bb69 + _0x505ba5; }, 'GWlXd': function (_0x2d1147, _0x2862dc) { return _0x2d1147 === _0x2862dc; }, 'cRWrf': _0x48d4fc(0x317, '0Ta%'), 'PsmGp': function (_0x2cb746, _0x2962ed) { return _0x2cb746 === _0x2962ed; }, 'RqZlU': function (_0x56597b, _0x19c231) { return _0x56597b + _0x19c231; }, 'eJDOf': function (_0x2c81ae, _0x4d1ee5) { return _0x2c81ae * _0x4d1ee5; }, 'gGjxh': function (_0x5096ae, _0x24708b) { return _0x5096ae / _0x24708b; }, 'aVyqO': function (_0x3fa156, _0x109a9e) { return _0x3fa156 / _0x109a9e; }, 'ysRyB': function (_0x4a692b, _0x8fd659) { return _0x4a692b / _0x8fd659; }, 'MRcqu': function (_0x3747e8, _0x56d516) { return _0x3747e8 > _0x56d516; }, 'wFrbV': function (_0x32edc6, _0x4a620b) { return _0x32edc6 < _0x4a620b; }, 'szkxL': function (_0xa81838, _0x285559) { return _0xa81838 <= _0x285559; }, 'YDHvG': function (_0x3ae673, _0x30401f) { return _0x3ae673 / _0x30401f; }, 'KNCjA': function (_0x2a0cac, _0x219b9b) { return _0x2a0cac / _0x219b9b; }, 'lZfRA': function (_0x5a587e, _0x5522b3) { return _0x5a587e <= _0x5522b3; }, 'YJUlc': function (_0x740b23, _0x4aacd2) { return _0x740b23 * _0x4aacd2; }, 'IMdOe': function (_0x427d9f, _0x39214e) { return _0x427d9f / _0x39214e; }, 'HDLrS': function (_0x4e2547, _0x99b77f) { return _0x4e2547 !== _0x99b77f; }, 'bIJJz': 'aYdbD', 'aHbMG': function (_0x2d4e6b, _0x202ba7) { return _0x2d4e6b < _0x202ba7; }, 'EwueQ': function (_0x205003, _0xfa388c) { return _0x205003 >= _0xfa388c; }, 'tiVki': function (_0x502b10, _0x33585f) { return _0x502b10 >= _0x33585f; }, 'yLKOS': function (_0x1088b3, _0x3abaa8) { return _0x1088b3 !== _0x3abaa8; }, 'oENqH': _0x48d4fc(0x4bb, '#AE9'), 'cjhFY': 'UOsyl' }; let _0x4174ed = []; for (let _0x443e33 = 0x0; _0x24f304[_0x48d4fc(0x349, ')mMd')](_0x443e33, this[_0x48d4fc(0x23d, 'o)(L')]); _0x443e33++) { _0x4174ed[_0x443e33] = []; for (let _0x17c5dc = 0x0; _0x24f304[_0x48d4fc(0x4de, 'PTCx')](_0x17c5dc, this['size']); _0x17c5dc++) { _0x4174ed[_0x443e33][_0x17c5dc] = Math['floor'](_0x24f304[_0x48d4fc(0x3e8, 'k1il')](Math['rando' + 'm'](), this[_0x48d4fc(0x420, 'Nb[n') + _0x48d4fc(0x316, 'SmxQ')])); } } for (let _0x560f22 = 0x0; _0x24f304[_0x48d4fc(0x36f, '^#Is')](_0x560f22, this['size']); _0x560f22++) { if (_0x24f304[_0x48d4fc(0x464, 'O3gn')](_0x24f304['avfSG'], _0x24f304[_0x48d4fc(0x37c, 'C4Fl')])) { function _0x2a6276() { const _0x502657 = _0x48d4fc; this[_0x502657(0x322, '20#*')][_0x502657(0x278, '2cY2') + 'me'](this[_0x502657(0x2b5, '20#*')]), this[_0x502657(0x3bf, 'B8C%') + 'r'](), this[_0x502657(0x4eb, '^#Is') + 'tStat' + 'e'](); } } else for (let _0x2dee03 = 0x0; _0x24f304[_0x48d4fc(0x1de, 'k1il')](_0x2dee03, this[_0x48d4fc(0x2e2, '$D]7')]); _0x2dee03++) { if (_0x24f304['HkXBZ'](_0x24f304[_0x48d4fc(0x3e9, 'BKRQ')], _0x24f304[_0x48d4fc(0x413, 'o)(L')])) { function _0x2cb0ea() { const _0x2ad94b = _0x48d4fc; for (let _0x3f1aca = 0x0; _0x24f304['kHxCY'](_0x3f1aca, this[_0x2ad94b(0x23d, 'o)(L')]); _0x3f1aca++) { for (let _0x135fd1 = 0x0; _0x24f304[_0x2ad94b(0x40e, 'PTCx')](_0x135fd1, this[_0x2ad94b(0x3cb, 'x1o9')]); _0x135fd1++) { if (_0x24f304['ZznOy'](this[_0x2ad94b(0x3ed, ')mMd')][_0x3f1aca][_0x135fd1], this[_0x2ad94b(0x26e, 'cmn3') + _0x2ad94b(0x4be, '(hEz')]) && _0x24f304[_0x2ad94b(0x2bf, 'C4Fl')](this[_0x2ad94b(0x4aa, '0Ta%')][_0x3f1aca][_0x135fd1], -0x1)) return ![]; } } return !![]; } } else { const _0x2e0872 = Math[_0x48d4fc(0x37f, '$D]7')](_0x24f304[_0x48d4fc(0x31a, 'C4Fl')](Math[_0x48d4fc(0x30b, '#AE9') + 'm'](), 0x5)); if (_0x24f304[_0x48d4fc(0x2de, 'PTCx')](_0x4174ed[_0x560f22][_0x2dee03], _0x2e0872)) { _0x24f304[_0x48d4fc(0x23b, 'yIt7')](_0x2dee03, 0x0) && _0x24f304[_0x48d4fc(0x469, '][()')](_0x4174ed[_0x560f22][_0x24f304[_0x48d4fc(0x40b, 'BKRQ')](_0x2dee03, 0x1)], _0x2e0872) && (_0x4174ed[_0x560f22][_0x2dee03] = _0x2e0872); if (_0x24f304[_0x48d4fc(0x48c, '7zlP')](_0x2dee03, _0x24f304[_0x48d4fc(0x444, 'C4Fl')](this[_0x48d4fc(0x1f3, 'C2Mi')], 0x1)) && _0x24f304[_0x48d4fc(0x2ad, 's$qC')](_0x4174ed[_0x560f22][_0x24f304[_0x48d4fc(0x4f8, '5$xj')](_0x2dee03, 0x1)], _0x2e0872)) { if (_0x24f304[_0x48d4fc(0x49c, 'cIA3')](_0x24f304['cRWrf'], _0x24f304['cRWrf'])) _0x4174ed[_0x560f22][_0x2dee03] = _0x2e0872; else { function _0x3a8c00() { const _0x4035b3 = _0x48d4fc; _0x2a6dc8['log'](_0x24f304['bnLiZ']); for (let _0x17d1e6 = 0x0; _0x24f304['AGRtr'](_0x17d1e6, this[_0x4035b3(0x323, 'dyQ(')]); _0x17d1e6++) { _0x3d96f4[_0x4035b3(0x25b, 'd9#K')](this[_0x4035b3(0x366, '9%h1')][_0x17d1e6][_0x4035b3(0x48f, '2cY2')]('\x20')); } } } } _0x24f304[_0x48d4fc(0x3b4, 's$qC')](_0x560f22, 0x0) && _0x24f304[_0x48d4fc(0x38e, 'PTCx')](_0x4174ed[_0x24f304[_0x48d4fc(0x23f, 'x1o9')](_0x560f22, 0x1)][_0x2dee03], _0x2e0872) && (_0x4174ed[_0x560f22][_0x2dee03] = _0x2e0872), _0x24f304[_0x48d4fc(0x39a, 'mzz]')](_0x560f22, _0x24f304[_0x48d4fc(0x215, '][()')](this[_0x48d4fc(0x2ed, 'Nb[n')], 0x1)) && _0x24f304[_0x48d4fc(0x443, 'DR9H')](_0x4174ed[_0x24f304['RqZlU'](_0x560f22, 0x1)][_0x2dee03], _0x2e0872) && (_0x4174ed[_0x560f22][_0x2dee03] = _0x2e0872); } } } } if (_0x24f304[_0x48d4fc(0x274, 'o)(L')](this[_0x48d4fc(0x4ab, 'ht[S')], this[_0x48d4fc(0x1e5, 'ht[S') + _0x48d4fc(0x44f, '0mty') + 'el']) && _0x24f304[_0x48d4fc(0x437, '#AE9')](this[_0x48d4fc(0x348, '!#XP') + _0x48d4fc(0x253, 'Y)xy')], 0x0)) { const _0x5a7287 = Math[_0x48d4fc(0x35e, 'BKRQ')](_0x24f304[_0x48d4fc(0x1f0, 'yRJS')](_0x24f304['eJDOf'](Math['rando' + 'm'](), this[_0x48d4fc(0x209, 'yyQ5')]), _0x24f304[_0x48d4fc(0x27e, '20#*')](0x1, _0x24f304[_0x48d4fc(0x4df, '9%h1')](this['diffi' + 'culty'], 0x8)))); let _0x53f4c1 = Math[_0x48d4fc(0x4dc, 'x1o9')](_0x24f304[_0x48d4fc(0x20e, 'V]UV')](_0x24f304['aVyqO'](this['size'], 0x2), _0x24f304[_0x48d4fc(0x247, 'cIA3')](_0x5a7287, 0x3))), _0x229524 = _0x53f4c1; const _0x40bfe3 = _0x24f304[_0x48d4fc(0x343, 'cmn3')](Math[_0x48d4fc(0x2cb, 'yRJS') + 'm'](), 0.5); for (let _0x3f8c3c = 0x0; _0x24f304[_0x48d4fc(0x4a6, '2cY2')](_0x3f8c3c, _0x5a7287); _0x3f8c3c++) { if (_0x24f304[_0x48d4fc(0x3c2, 'k1il')](_0x3f8c3c, _0x24f304[_0x48d4fc(0x2c7, 'dyQ(')](_0x5a7287, 0x3))) _0x40bfe3 ? _0x53f4c1++ : _0x229524++; else { if (_0x24f304[_0x48d4fc(0x4e7, 'Dk%u')](_0x3f8c3c, _0x24f304[_0x48d4fc(0x470, '(9zh')](_0x5a7287, 0x3)) && _0x24f304[_0x48d4fc(0x2e4, 'o)(L')](_0x3f8c3c, _0x24f304[_0x48d4fc(0x337, 'C4Fl')](_0x24f304[_0x48d4fc(0x2bc, 'V]UV')](_0x5a7287, 0x3), 0x2))) { if (_0x24f304[_0x48d4fc(0x236, '2cY2')](_0x24f304[_0x48d4fc(0x2a7, '(9zh')], _0x24f304[_0x48d4fc(0x4f4, 'k1il')])) { function _0x33f3fe() { const _0x310f83 = _0x48d4fc, _0x33d78a = _0x24f304['Feqel'][_0x310f83(0x31c, 'R6hL')]('|'); let _0x9448a7 = 0x0; while (!![]) { switch (_0x33d78a[_0x9448a7++]) { case '0': _0x24f304[_0x310f83(0x32f, 'k1il')](_0x3bcd04); continue; case '1': _0x55209f[_0x310f83(0x1df, 'cIA3') + _0x310f83(0x407, 'C2Mi') + 't'] = _0x24f304['ctLTJ']; continue; case '2': _0x24f304['eJAhb'](_0x4ca88b, 0x0, this[_0x310f83(0x302, 'Nb[n')]); continue; case '3': this['break'] = !![]; continue; case '4': _0x1ac03b[_0x310f83(0x4c6, 'dyQ(') + 'entLi' + _0x310f83(0x43f, '][()') + 'r'](_0x24f304[_0x310f83(0x318, 's$qC')], _0xfddf09 => this[_0x310f83(0x31d, '$Bna') + 'eInpu' + 't'](_0xfddf09, this), { 'once': !![] }); continue; }break; } } } else _0x40bfe3 ? _0x229524++ : _0x53f4c1++; } else _0x40bfe3 ? _0x53f4c1++ : _0x229524++; } if (_0x24f304[_0x48d4fc(0x1fb, '(hEz')](_0x53f4c1, this['size']) && _0x24f304[_0x48d4fc(0x2d7, '#AE9')](_0x229524, this[_0x48d4fc(0x4ee, 'cvSh')]) && _0x24f304[_0x48d4fc(0x351, '(hEz')](_0x53f4c1, 0x0) && _0x24f304[_0x48d4fc(0x3a5, '0Ta%')](_0x229524, 0x0)) { if (_0x24f304[_0x48d4fc(0x434, '9%h1')](_0x24f304['oENqH'], _0x24f304[_0x48d4fc(0x47f, 'BKRQ')])) _0x4174ed[_0x53f4c1][_0x229524] = -0x1; else { function _0x42a9ef() { const _0x3733ca = _0x48d4fc, _0xba95af = _0x24f304[_0x3733ca(0x45a, '7zlP')][_0x3733ca(0x45b, '0Ta%')]('|'); let _0x31f31d = 0x0; while (!![]) { switch (_0xba95af[_0x31f31d++]) { case '0': this[_0x3733ca(0x2fc, '0UXn') + 'Fill'](_0x24f304[_0x3733ca(0x380, '5#b#')](_0x4f96e9, 0x1), _0x2af7d9, _0x5c2a76, _0x409f81); continue; case '1': this[_0x3733ca(0x383, 'V]UV') + _0x3733ca(0x43e, 'dyQ(')](_0x24f304[_0x3733ca(0x4a9, 'o)(L')](_0x1a9bd2, 0x1), _0x1168aa, _0x528d75, _0xa7ff6d); continue; case '2': if (_0x24f304[_0x3733ca(0x277, 'a08p')](_0x5a7605, 0x0) || _0x24f304[_0x3733ca(0x433, 'Dk%u')](_0x49e624, 0x0) || _0x24f304[_0x3733ca(0x3d6, 'CiSz')](_0x158093, this[_0x3733ca(0x323, 'dyQ(')]) || _0x24f304[_0x3733ca(0x274, 'o)(L')](_0x31668b, this[_0x3733ca(0x4c7, 'R6hL')])) return; continue; case '3': this[_0x3733ca(0x40c, '5#b#') + _0x3733ca(0x440, 'SmxQ')](_0x1c1097, _0x24f304[_0x3733ca(0x2b0, ')mMd')](_0x5ca0c6, 0x1), _0x316b2c, _0x2eefd3); continue; case '4': if (_0x24f304[_0x3733ca(0x482, '$Bna')](this[_0x3733ca(0x336, '][()')][_0x141af9][_0x954eb5], _0x182544)) return; continue; case '5': this[_0x3733ca(0x455, 'BKRQ') + _0x3733ca(0x2a1, 'yyQ5')](_0x4f65f4, _0x24f304[_0x3733ca(0x452, 'cvSh')](_0x46eec4, 0x1), _0x1fcc89, _0x64cb64); continue; case '6': this[_0x3733ca(0x366, '9%h1')][_0x2cddd7][_0x499e00] = _0x79df68; continue; }break; } } } } } } this[_0x48d4fc(0x2f6, 'cmn3')] = _0x4174ed; } ['setCo' + _0x40a883(0x22c, 'wgx$')](_0x59f286) { const _0x2660e7 = _0x40a883, _0x592160 = { 'THlBh': function (_0x1d2040, _0x53bfb8) { return _0x1d2040 === _0x53bfb8; }, 'CrHPK': function (_0x57528b, _0x1e9c1b) { return _0x57528b === _0x1e9c1b; } }; if (_0x592160[_0x2660e7(0x3df, '5#b#')](_0x59f286, this[_0x2660e7(0x421, '0mty') + _0x2660e7(0x353, 'yIt7')]) || _0x592160[_0x2660e7(0x3ea, '20#*')](this['start' + 'Color'], -0x1)) return; this[_0x2660e7(0x3e6, 'dyQ(') + _0x2660e7(0x206, 'PTCx')](0x0, 0x0, this[_0x2660e7(0x40f, 'Dk%u') + _0x2660e7(0x359, 'R6hL')], _0x59f286), this['start' + _0x2660e7(0x3ad, '20#*')] = _0x59f286, this[_0x2660e7(0x385, 'x1o9')]++; } [_0x40a883(0x37a, '#Dbn') + _0x40a883(0x379, '#AE9')](_0x248f25, _0x3c8678, _0x34d8f5, _0x28c9f5) { const _0x4c6bc7 = _0x40a883, _0x20716d = { 'SBPZx': _0x4c6bc7(0x22d, '(9zh') + _0x4c6bc7(0x487, '2cY2') + '2|4', 'pTMGF': function (_0x3a2843, _0x2077ea) { return _0x3a2843 - _0x2077ea; }, 'ImLpm': function (_0x3abe0e, _0x519dcd) { return _0x3abe0e + _0x519dcd; }, 'nptQU': function (_0x126d19, _0x497c98) { return _0x126d19 < _0x497c98; }, 'ihbpp': function (_0x55cffc, _0x274095) { return _0x55cffc >= _0x274095; }, 'HdlxG': function (_0x14f332, _0x123063) { return _0x14f332 >= _0x123063; }, 'wDjAW': function (_0x1ffd22, _0x39bd26) { return _0x1ffd22 !== _0x39bd26; } }, _0x50bfa4 = _0x20716d[_0x4c6bc7(0x29b, 'd9#K')][_0x4c6bc7(0x26b, 'C2Mi')]('|'); let _0x289ef2 = 0x0; while (!![]) { switch (_0x50bfa4[_0x289ef2++]) { case '0': this[_0x4c6bc7(0x4d3, '0mty') + 'Fill'](_0x20716d[_0x4c6bc7(0x33c, 'BKRQ')](_0x248f25, 0x1), _0x3c8678, _0x34d8f5, _0x28c9f5); continue; case '1': this['flood' + 'Fill'](_0x20716d[_0x4c6bc7(0x43b, 's$qC')](_0x248f25, 0x1), _0x3c8678, _0x34d8f5, _0x28c9f5); continue; case '2': this[_0x4c6bc7(0x383, 'V]UV') + 'Fill'](_0x248f25, _0x20716d[_0x4c6bc7(0x20a, 'cIA3')](_0x3c8678, 0x1), _0x34d8f5, _0x28c9f5); continue; case '3': if (_0x20716d[_0x4c6bc7(0x246, 'yyQ5')](_0x248f25, 0x0) || _0x20716d['nptQU'](_0x3c8678, 0x0) || _0x20716d['ihbpp'](_0x248f25, this[_0x4c6bc7(0x483, '^#Is')]) || _0x20716d[_0x4c6bc7(0x301, 'yRJS')](_0x3c8678, this[_0x4c6bc7(0x2e2, '$D]7')])) return; continue; case '4': this[_0x4c6bc7(0x4c8, '^#Is') + 'Fill'](_0x248f25, _0x20716d['pTMGF'](_0x3c8678, 0x1), _0x34d8f5, _0x28c9f5); continue; case '5': this['cells'][_0x3c8678][_0x248f25] = _0x28c9f5; continue; case '6': if (_0x20716d[_0x4c6bc7(0x4b9, '][()')](this[_0x4c6bc7(0x24f, 'cIA3')][_0x3c8678][_0x248f25], _0x34d8f5)) return; continue; }break; } } [_0x40a883(0x386, '0UXn') + 'r']() { const _0x61fba5 = _0x40a883, _0x204ca6 = { 'lCroJ': function (_0x2fea67, _0xd9bfa0) { return _0x2fea67 >= _0xd9bfa0; } }; return _0x204ca6[_0x61fba5(0x4b0, 'o)(L')](this[_0x61fba5(0x36a, 'C2Mi')], this[_0x61fba5(0x3a8, 'cIA3') + _0x61fba5(0x2ec, '0Ta%')]) && !this[_0x61fba5(0x3f5, 'O3gn') + _0x61fba5(0x2a0, '5#b#') + 'd'](); } [_0x40a883(0x4d8, 'yIt7') + _0x40a883(0x28e, '#AE9') + 'd']() { const _0xc98eca = _0x40a883, _0x5e25b5 = { 'qwWxz': function (_0x140821, _0x5f5c9a) { return _0x140821 < _0x5f5c9a; }, 'RxfKz': function (_0xbc32ec, _0x2945b9) { return _0xbc32ec < _0x2945b9; }, 'TggHR': function (_0x771b10, _0xde1079) { return _0x771b10 !== _0xde1079; }, 'jPQke': function (_0x426b5e, _0x5027b2) { return _0x426b5e === _0x5027b2; }, 'iNRzZ': _0xc98eca(0x3be, '^#Is'), 'LujAJ': 'UneZK' }; for (let _0x8756f6 = 0x0; _0x5e25b5['qwWxz'](_0x8756f6, this[_0xc98eca(0x23d, 'o)(L')]); _0x8756f6++) { for (let _0x421093 = 0x0; _0x5e25b5['RxfKz'](_0x421093, this['size']); _0x421093++) { if (_0x5e25b5[_0xc98eca(0x345, 'V]UV')](this[_0xc98eca(0x27a, '(9zh')][_0x8756f6][_0x421093], this[_0xc98eca(0x3b9, 'SmxQ') + _0xc98eca(0x338, '2cY2')]) && _0x5e25b5['TggHR'](this[_0xc98eca(0x49e, '2cY2')][_0x8756f6][_0x421093], -0x1)) { if (_0x5e25b5[_0xc98eca(0x410, 'Nb[n')](_0x5e25b5[_0xc98eca(0x287, 'PTCx')], _0x5e25b5[_0xc98eca(0x4c2, 'DR9H')])) { function _0x16bdab() { _0x1dc6bc[_0x3201ec][_0x3f352d] = _0x4be303; } } else return ![]; } } } return !![]; } [_0x40a883(0x38a, 'yyQ5') + _0x40a883(0x28b, 'DR9H')]() { const _0x43a196 = _0x40a883, _0x341144 = { 'XySeL': _0x43a196(0x228, 'C4Fl') + 'nt\x20gr' + _0x43a196(0x4ae, 'B8C%'), 'KvTet': function (_0x116e7e, _0x5e8613) { return _0x116e7e < _0x5e8613; }, 'vhqyd': function (_0x579e9c, _0x5a6c0e) { return _0x579e9c !== _0x5a6c0e; }, 'ebiiH': _0x43a196(0x24b, 'yRJS'), 'udrEm': _0x43a196(0x212, '20#*') }; console[_0x43a196(0x27f, '][()')](_0x341144['XySeL']); for (let _0x5d115b = 0x0; _0x341144[_0x43a196(0x341, 'CiSz')](_0x5d115b, this['size']); _0x5d115b++) { if (_0x341144[_0x43a196(0x231, '!#XP')](_0x341144[_0x43a196(0x26f, '0mty')], _0x341144[_0x43a196(0x296, 'C2Mi')])) console[_0x43a196(0x391, '(9zh')](this[_0x43a196(0x220, 'yyQ5')][_0x5d115b]['join']('\x20')); else { function _0x4432e1() { const _0x36c403 = _0x43a196, _0x4aa071 = _0x881811[_0x36c403(0x355, 'SmxQ') + 'ructo' + 'r'][_0x36c403(0x2dd, '2cY2') + 'type']['bind'](_0x1afd8f), _0x1a4acc = _0xf3509a[_0xcfca9c], _0x366de8 = _0x1a2d77[_0x1a4acc] || _0x4aa071; _0x4aa071[_0x36c403(0x4c4, 'mzz]') + _0x36c403(0x1fa, 'BKRQ')] = _0x482d23[_0x36c403(0x4bd, 'mzz]')](_0x3c62bc), _0x4aa071[_0x36c403(0x467, '$Bna') + 'ing'] = _0x366de8[_0x36c403(0x370, 'Nb[n') + _0x36c403(0x1e0, 'mzz]')]['bind'](_0x366de8), _0x249439[_0x1a4acc] = _0x4aa071; } } } } } class Game { constructor(_0x3a6994, _0x20d210 = 0xa, _0xdc3de = 0x28) { const _0x4c3290 = _0x40a883, _0x2c6514 = { 'RHHza': function (_0x215bc2, _0x47658b) { return _0x215bc2(_0x47658b); }, 'mzoyo': _0x4c3290(0x281, 'dyQ('), 'KmmKg': function (_0xc95a79, _0x42242e) { return _0xc95a79 !== _0x42242e; }, 'FiUlL': _0x4c3290(0x2e0, '$D]7'), 'JqFia': _0x4c3290(0x367, 'wgx$'), 'qmsrF': function (_0x41b539, _0x4eaa50) { return _0x41b539(_0x4eaa50); } }; this[_0x4c3290(0x254, '^#Is') + 's'] = document[_0x4c3290(0x303, 'SmxQ') + _0x4c3290(0x4a0, '$D]7') + _0x4c3290(0x456, 'agg!')](_0x3a6994), this[_0x4c3290(0x2cd, '#Dbn')] = this[_0x4c3290(0x387, 'mzz]') + 's'][_0x4c3290(0x285, 'yRJS') + _0x4c3290(0x347, '$Bna')]('2d'), this[_0x4c3290(0x2a6, 'agg!') + 'Contr' + _0x4c3290(0x313, '!#XP')](), this[_0x4c3290(0x1dd, 'a08p')] = new Flood(0x8, 0x6), this['moves'] = 0x0, this[_0x4c3290(0x311, 'wgx$') + _0x4c3290(0x2c9, 'O3gn')] = 0x19, this[_0x4c3290(0x3a3, '0UXn')] = 0x1; const _0x80c463 = _0x2c6514[_0x4c3290(0x3f3, 'Dk%u')](getCookie, _0x2c6514[_0x4c3290(0x4e9, '0mty')]); if (_0x80c463) { if (_0x2c6514[_0x4c3290(0x292, 'dyQ(')](_0x2c6514[_0x4c3290(0x361, 'R6hL')], _0x2c6514[_0x4c3290(0x438, 'DR9H')])) this[_0x4c3290(0x4f6, '7zlP')] = _0x2c6514[_0x4c3290(0x21a, 'CiSz')](Number, _0x80c463); else { function _0x1507f7() { _0x3385f0[_0x352dda][_0x14c89c] = _0x3819ff; } } } this[_0x4c3290(0x429, '7zlP') + 'me'](), this[_0x4c3290(0x257, 'C2Mi')] = ![]; } ['newGa' + 'me']() { const _0x2b85b2 = _0x40a883; this[_0x2b85b2(0x3c5, 'o)(L')]['newGa' + 'me'](this[_0x2b85b2(0x35c, 'Y)xy')]), this[_0x2b85b2(0x326, 'a08p') + 'r'](), this[_0x2b85b2(0x422, '0Ta%') + _0x2b85b2(0x24d, '20#*') + 'e'](); } ['isGam' + _0x40a883(0x46a, 'dyQ(')]() { const _0x308317 = _0x40a883, _0x252dea = { 'pdcyF': function (_0x152d0d, _0x4f76dc) { return _0x152d0d >= _0x4f76dc; } }; return _0x252dea[_0x308317(0x307, '^#Is')](this[_0x308317(0x3f8, 'PTCx')], this[_0x308317(0x4fa, 'O3gn') + _0x308317(0x234, '!#XP')]) && !this[_0x308317(0x305, '][()')]['isCom' + _0x308317(0x472, 'CiSz') + 'd'](); } [_0x40a883(0x4ed, 'agg!') + 'eComp' + _0x40a883(0x239, 'PTCx')]() { const _0x40da09 = _0x40a883; return this[_0x40da09(0x455, 'BKRQ')]['isCom' + _0x40da09(0x241, '$Bna') + 'd'](); } [_0x40a883(0x46f, '2cY2') + _0x40a883(0x204, '0UXn') + 'e']() { const _0x39629e = _0x40a883, _0x50548c = { 'GsJpI': function (_0x4ec2fa, _0x32dbc6) { return _0x4ec2fa(_0x32dbc6); }, 'DQPIT': _0x39629e(0x479, 'C4Fl') + _0x39629e(0x430, '9%h1'), 'kQBpr': function (_0xa5fb6, _0x5087e3) { return _0xa5fb6 + _0x5087e3; }, 'DhWcy': _0x39629e(0x30a, '^#Is') + _0x39629e(0x2c6, '][()'), 'yZDPW': '#scor' + 'e-val' }; _0x50548c[_0x39629e(0x461, '5$xj')]($, _0x50548c['DQPIT'])[_0x39629e(0x463, '^#Is')](_0x50548c[_0x39629e(0x4b8, 'DR9H')](this['level'], _0x50548c[_0x39629e(0x2ff, 'V]UV')])), _0x50548c['GsJpI']($, _0x50548c['yZDPW'])[_0x39629e(0x463, '^#Is')](_0x50548c[_0x39629e(0x32e, 'CiSz')](_0x50548c[_0x39629e(0x374, '9%h1')](this[_0x39629e(0x279, 'k1il')]['moves'], '/'), this['flood']['maxMo' + _0x39629e(0x3e7, 'DR9H')])); } ['setup' + _0x40a883(0x4c5, 's$qC') + _0x40a883(0x4fc, '0mty')]() { const _0x57a64a = _0x40a883, _0x2c1851 = { 'skjSS': function (_0x4149dc, _0x21b8e3) { return _0x4149dc(_0x21b8e3); }, 'wLNXp': _0x57a64a(0x465, '5$xj') + 'color', 'FHxGi': _0x57a64a(0x2d8, 's$qC'), 'YrhPy': function (_0x52541e, _0x4675a4) { return _0x52541e + _0x4675a4; }, 'wwdCz': _0x57a64a(0x3c8, 'x1o9') + _0x57a64a(0x2cf, '7zlP') + _0x57a64a(0x4f7, 'Y)xy') + 'r:', 'kRrIW': function (_0x3844f5, _0x1dc0f4) { return _0x3844f5 + _0x1dc0f4; }, 'fIFZp': function (_0x5d59c3, _0x417788) { return _0x5d59c3 + _0x417788; }, 'VkLsU': _0x57a64a(0x435, '!#XP') + _0x57a64a(0x491, 'ht[S'), 'yFxBJ': '=([^;' + _0x57a64a(0x425, '5$xj'), 'Pupfz': function (_0xfb9fbc, _0x165e19) { return _0xfb9fbc(_0x165e19); }, 'TzOIq': function (_0x3e0ddd, _0x46d7b5) { return _0x3e0ddd >= _0x46d7b5; }, 'unbjd': _0x57a64a(0x416, 'dyQ(') + '50', 'LUKga': _0x57a64a(0x20c, 'Y)xy') + 'f5', 'lIHil': _0x57a64a(0x2fb, 'PTCx') + '6a', 'xQDLB': _0x57a64a(0x3de, '20#*') + '26', 'wWtqO': _0x57a64a(0x2f1, '#AE9') + 'fc', 'ARGPU': _0x57a64a(0x2c5, 'O3gn') + 'bc', 'qzRNp': _0x57a64a(0x3cd, ')mMd') + 'da', 'FlabK': function (_0x14efd4, _0x35b1bb) { return _0x14efd4 % _0x35b1bb; }, 'eZdRl': function (_0x1acd3a, _0x4bd049) { return _0x1acd3a !== _0x4bd049; }, 'wjdVc': _0x57a64a(0x1ec, '5#b#'), 'fKMtF': function (_0x238455, _0x54c343) { return _0x238455 === _0x54c343; }, 'jkwin': _0x57a64a(0x4b7, 'yIt7'), 'ZCIaj': function (_0x524904, _0x384e5d) { return _0x524904 === _0x384e5d; }, 'SscUI': _0x57a64a(0x4bc, 'R6hL'), 'MEnlc': _0x57a64a(0x25c, '$Bna'), 'MVceV': _0x57a64a(0x4f3, '5$xj'), 'vgkhv': function (_0x4199d1, _0x4e6632, _0x32f28c, _0x1a696a) { return _0x4199d1(_0x4e6632, _0x32f28c, _0x1a696a); }, 'PmDpr': _0x57a64a(0x29d, 's$qC'), 'aBADS': function (_0x2bc0b7) { return _0x2bc0b7(); }, 'bBdCO': function (_0x1b1e01, _0x297220) { return _0x1b1e01 - _0x297220; }, 'YBxwO': function (_0x13448c, _0x2000a9) { return _0x13448c - _0x2000a9; }, 'RIebY': function (_0x30af8d, _0x45e3d3) { return _0x30af8d / _0x45e3d3; }, 'NgQAL': function (_0x16546e, _0x36c58c) { return _0x16546e / _0x36c58c; }, 'IuDYy': _0x57a64a(0x314, 'C2Mi') + _0x57a64a(0x4cc, 'ht[S') + _0x57a64a(0x2d2, 'B8C%') + _0x57a64a(0x30c, 'DR9H'), 'VqiOV': _0x57a64a(0x36d, 'DR9H') + _0x57a64a(0x497, 'CiSz') + 't', 'fSzhA': _0x57a64a(0x283, 's$qC') + _0x57a64a(0x3da, 'dyQ(') }; document[_0x57a64a(0x34a, 'B8C%') + _0x57a64a(0x492, '9%h1') + _0x57a64a(0x4e5, 'Dk%u') + 'l'](_0x2c1851['IuDYy'])[_0x57a64a(0x24e, 'PTCx') + 'ch'](_0x3229c7 => { const _0xdf860e = _0x57a64a, _0xa13ef1 = _0x2c1851[_0xdf860e(0x402, 'cmn3')](parseInt, _0x3229c7[_0xdf860e(0x372, 'wgx$') + _0xdf860e(0x3d2, '2cY2') + 'te'](_0x2c1851[_0xdf860e(0x284, 'yRJS')])); _0x3229c7[_0xdf860e(0x356, 'dyQ(') + _0xdf860e(0x436, 'yRJS') + 'te'](_0x2c1851[_0xdf860e(0x4cd, 'a08p')], _0x2c1851[_0xdf860e(0x2dc, 'agg!')](_0x2c1851['wwdCz'], Game['color' + _0xdf860e(0x2a4, 'V]UV')](_0xa13ef1))); }), document[_0x57a64a(0x34a, 'B8C%') + _0x57a64a(0x333, '0UXn') + _0x57a64a(0x29a, 's$qC') + 'l'](_0x2c1851['IuDYy'])['forEa' + 'ch'](_0x3d3209 => { const _0x4b1496 = _0x57a64a; if (_0x2c1851['ZCIaj'](_0x2c1851[_0x4b1496(0x3ef, 'cmn3')], _0x2c1851[_0x4b1496(0x21f, 'SmxQ')])) { function _0x2712cc() { const _0x1b43dc = _0x4b1496, _0x15ff70 = _0x5bd678[_0x1b43dc(0x2ee, 'cvSh') + 'e'][_0x1b43dc(0x454, 'x1o9')](new _0x5a46a6(_0x2c1851[_0x1b43dc(0x275, '$Bna')](_0x2c1851[_0x1b43dc(0x43a, '0Ta%')](_0x2c1851[_0x1b43dc(0x286, '$Bna')], _0x52ca64), _0x2c1851['yFxBJ']))); return _0x15ff70 ? _0x2c1851[_0x1b43dc(0x37d, '(hEz')](_0x12bd17, _0x15ff70[0x2]) : ''; } } else _0x3d3209[_0x4b1496(0x4ef, 'cIA3') + _0x4b1496(0x493, '(9zh') + _0x4b1496(0x40a, '5$xj') + 'r'](_0x2c1851[_0x4b1496(0x22b, 'C2Mi')], () => { const _0x5de8fe = _0x4b1496, _0x23a24f = { 'BodPe': function (_0x5859a2, _0x4494c3) { const _0x36fc47 = _0x24a4; return _0x2c1851[_0x36fc47(0x201, '9%h1')](_0x5859a2, _0x4494c3); }, 'VHKZf': _0x2c1851[_0x5de8fe(0x4af, 'a08p')], 'alplp': _0x2c1851['LUKga'], 'Pcjwq': _0x2c1851[_0x5de8fe(0x230, 'cIA3')], 'vnbbF': _0x2c1851[_0x5de8fe(0x41f, 'k1il')], 'NziAd': _0x2c1851[_0x5de8fe(0x21d, '(9zh')], 'BBWbG': _0x2c1851[_0x5de8fe(0x2d0, '][()')], 'nzlwz': _0x2c1851['qzRNp'], 'FGZNu': function (_0x420381, _0x3fa82e) { const _0x1c0b63 = _0x5de8fe; return _0x2c1851[_0x1c0b63(0x3dc, 'Dk%u')](_0x420381, _0x3fa82e); } }; if (_0x2c1851[_0x5de8fe(0x392, 'O3gn')](_0x2c1851[_0x5de8fe(0x339, 'BKRQ')], _0x2c1851[_0x5de8fe(0x406, 'dyQ(')])) { function _0x5bbe10() { const _0x4adcef = _0x5de8fe; return _0x23a24f[_0x4adcef(0x4b3, 'DR9H')](this[_0x4adcef(0x27d, 'R6hL')], this['maxMo' + _0x4adcef(0x4b5, 's$qC')]) && !this['flood'][_0x4adcef(0x4a4, 'mzz]') + _0x4adcef(0x47c, 'cIA3') + 'd'](); } } else { if (this[_0x5de8fe(0x257, 'C2Mi')]) console[_0x5de8fe(0x360, 'SmxQ')](_0x5de8fe(0x364, 'yIt7') + _0x5de8fe(0x33d, 'C4Fl') + _0x5de8fe(0x3fe, 'cmn3') + this['break'] + '\x20'), this['break'] = ![]; else { if (_0x2c1851[_0x5de8fe(0x268, '5#b#')](_0x2c1851[_0x5de8fe(0x494, 'x1o9')], _0x2c1851[_0x5de8fe(0x29f, '^#Is')])) { const _0x4950b4 = _0x2c1851[_0x5de8fe(0x2f5, '20#*')](parseInt, _0x3d3209['getAt' + _0x5de8fe(0x4e6, '$D]7') + 'te'](_0x2c1851[_0x5de8fe(0x449, 'Dk%u')])); this[_0x5de8fe(0x263, 'k1il') + 'ove'](_0x4950b4); } else { function _0x23e341() { const _0x54b3e3 = _0x5de8fe, _0xa4accd = [_0x23a24f['VHKZf'], _0x23a24f[_0x54b3e3(0x289, 'cvSh')], _0x23a24f[_0x54b3e3(0x266, '0UXn')], _0x23a24f[_0x54b3e3(0x39d, 'O3gn')], _0x23a24f[_0x54b3e3(0x1fd, 'yyQ5')], _0x23a24f['BBWbG'], _0x23a24f[_0x54b3e3(0x3c7, 'mzz]')]]; return _0xa4accd[_0x23a24f[_0x54b3e3(0x45f, '(hEz')](_0x3d1e5b, _0xa4accd[_0x54b3e3(0x23e, '#Dbn') + 'h'])]; } } } } }); }); const _0x5b4ec7 = document['getEl' + 'ement' + _0x57a64a(0x28d, 'dyQ(')](_0x2c1851[_0x57a64a(0x34f, 'R6hL')]); _0x5b4ec7[_0x57a64a(0x468, 'CiSz') + _0x57a64a(0x2c0, '$D]7') + 'stene' + 'r'](_0x2c1851[_0x57a64a(0x38f, 'k1il')], _0x204085 => { const _0x4c6f8d = _0x57a64a; this[_0x4c6f8d(0x393, 'cIA3')] = 0x1, _0x2c1851[_0x4c6f8d(0x47a, '0Ta%')](setCookie, _0x2c1851[_0x4c6f8d(0x368, '0mty')], this[_0x4c6f8d(0x209, 'yyQ5')], 0x1e), this['newGa' + 'me'](), _0x2c1851[_0x4c6f8d(0x229, '^#Is')](triggerWave); }); const _0x394834 = document[_0x57a64a(0x276, '$D]7') + _0x57a64a(0x365, '(9zh') + _0x57a64a(0x41b, '5$xj')](_0x2c1851['fSzhA']); _0x394834[_0x57a64a(0x261, 'wgx$') + _0x57a64a(0x2e9, '7zlP') + _0x57a64a(0x4d2, 'x1o9') + 'r'](_0x2c1851[_0x57a64a(0x218, 'ht[S')], _0x1d84b9 => { const _0x3a38e6 = _0x57a64a, _0x3f1277 = _0x394834[_0x3a38e6(0x2f0, 'CiSz') + 'undin' + 'gClie' + _0x3a38e6(0x460, 'R6hL') + 't'](), _0x3888ee = _0x2c1851[_0x3a38e6(0x304, '(9zh')](_0x1d84b9[_0x3a38e6(0x352, 'Y)xy') + 'tX'], _0x3f1277[_0x3a38e6(0x2bd, '#AE9')]), _0x1ed78a = _0x2c1851[_0x3a38e6(0x36b, 'cmn3')](_0x1d84b9[_0x3a38e6(0x36e, '2cY2') + 'tY'], _0x3f1277['top']), _0x33505d = _0x2c1851[_0x3a38e6(0x2f8, 'd9#K')](_0x394834[_0x3a38e6(0x45e, 'yyQ5') + _0x3a38e6(0x49d, 'yRJS') + 'h'], this[_0x3a38e6(0x3af, 'yRJS')]['size']), _0xc9aa77 = Math[_0x3a38e6(0x2c4, 'R6hL')](_0x2c1851['NgQAL'](_0x3888ee, _0x33505d)), _0x140fe9 = Math[_0x3a38e6(0x415, 'mzz]')](_0x2c1851[_0x3a38e6(0x498, '$Bna')](_0x1ed78a, _0x33505d)); this['break'] ? this[_0x3a38e6(0x332, 'a08p')] = ![] : this['makeM' + _0x3a38e6(0x3f1, '#AE9')](this[_0x3a38e6(0x2d3, '(hEz')][_0x3a38e6(0x378, 'ht[S')][_0x140fe9][_0xc9aa77]); }); } ['makeM' + _0x40a883(0x3d4, 'SmxQ')](_0x5c8ba7) { const _0x46cfab = _0x40a883, _0x996323 = { 'pVVuU': function (_0x225f21, _0xe6654d) { return _0x225f21 === _0xe6654d; }, 'BeCPC': function (_0x5a11cf, _0x3cb006) { return _0x5a11cf == _0x3cb006; }, 'sbLWb': 'messa' + 'ge', 'kEuLC': _0x46cfab(0x32b, 'ht[S') + _0x46cfab(0x1f7, 'agg!') + _0x46cfab(0x426, 'Nb[n'), 'dverZ': function (_0x42ee3e, _0x1dc106, _0x29ac13, _0x1c5c35) { return _0x42ee3e(_0x1dc106, _0x29ac13, _0x1c5c35); }, 'DLCQC': _0x46cfab(0x48b, '^#Is'), 'cWIAJ': function (_0x404856) { return _0x404856(); }, 'EEwXY': _0x46cfab(0x45c, 'd9#K') + _0x46cfab(0x405, 's$qC'), 'ExHQX': function (_0x4db305, _0x41fa98, _0x3a710b) { return _0x4db305(_0x41fa98, _0x3a710b); }, 'RTlxI': function (_0x5116cb, _0x5a6ced) { return _0x5116cb + _0x5a6ced; }, 'fygpD': function (_0x190d22, _0x4d2f42) { return _0x190d22 + _0x4d2f42; }, 'rjNqN': function (_0x2d5a9d, _0x3c7e5e) { return _0x2d5a9d + _0x3c7e5e; }, 'gmVHp': function (_0x374fa2, _0x3d9ac0) { return _0x374fa2 + _0x3d9ac0; }, 'WGPuF': _0x46cfab(0x28a, 'wgx$') + '\x20', 'DJNiD': _0x46cfab(0x3b8, '0UXn') + _0x46cfab(0x4d0, ')mMd') + ':\x20', 'laINz': '\x20move' + _0x46cfab(0x2a8, 'Y)xy') + _0x46cfab(0x2b1, '^#Is') + 'o\x20con' + _0x46cfab(0x458, 'C2Mi') + '...', 'tqkZG': function (_0x453b2a, _0x4f9462) { return _0x453b2a === _0x4f9462; }, 'Uvtzp': _0x46cfab(0x3d8, '#AE9'), 'FYoGQ': _0x46cfab(0x335, 'dyQ('), 'GpHwx': _0x46cfab(0x2ea, 'C2Mi') + _0x46cfab(0x501, 'k1il'), 'wEKJp': 'Game\x20' + _0x46cfab(0x282, ')mMd') + _0x46cfab(0x21b, 'Y)xy') + 'k\x20to\x20' + 'conti' + 'nue..' + '.', 'CGYLN': function (_0x1541ec) { return _0x1541ec(); }, 'TZmnT': function (_0x9a9794, _0x28aa72, _0x3395e3) { return _0x9a9794(_0x28aa72, _0x3395e3); } }; if (_0x996323[_0x46cfab(0x2fe, 'yRJS')](_0x5c8ba7, -0x1)) return; this[_0x46cfab(0x4d3, '0mty')]['setCo' + _0x46cfab(0x264, 'yIt7')](_0x5c8ba7), this[_0x46cfab(0x49b, '5#b#')]++, this[_0x46cfab(0x4e1, 'R6hL')] = ![], this['rende' + 'r'](); const _0x2c389d = document[_0x46cfab(0x2c2, '5$xj') + _0x46cfab(0x2ab, ')mMd') + _0x46cfab(0x4f0, 'C4Fl')](_0x996323['sbLWb']); this[_0x46cfab(0x2d1, 'k1il') + _0x46cfab(0x1e8, 'cmn3') + 'e'](); if (this[_0x46cfab(0x322, '20#*')][_0x46cfab(0x4d7, 'o)(L') + _0x46cfab(0x49a, '(hEz') + 'd']()) { const _0x406eae = _0x996323[_0x46cfab(0x3ee, 'cvSh')]['split']('|'); let _0x226d31 = 0x0; while (!![]) { switch (_0x406eae[_0x226d31++]) { case '0': _0x996323[_0x46cfab(0x44a, 'B8C%')](setCookie, _0x996323[_0x46cfab(0x4fb, 'mzz]')], this[_0x46cfab(0x2aa, '5#b#')], 0x1e); continue; case '1': _0x996323['cWIAJ'](triggerWave); continue; case '2': this['break'] = !![]; continue; case '3': this[_0x46cfab(0x389, 'agg!')]++; continue; case '4': document[_0x46cfab(0x22e, 'ht[S') + _0x46cfab(0x400, 'BKRQ') + _0x46cfab(0x417, '!#XP') + 'r'](_0x996323['EEwXY'], _0x366438 => this[_0x46cfab(0x3f0, 'o)(L') + _0x46cfab(0x489, '#Dbn') + 't'](_0x366438, this), { 'once': !![] }); continue; case '5': _0x996323['ExHQX'](gaTrack, 0x1, this['level']); continue; case '6': _0x2c389d['inner' + 'HTML'] = _0x996323[_0x46cfab(0x3f7, '0UXn')](_0x996323[_0x46cfab(0x3e1, '][()')](_0x996323[_0x46cfab(0x308, ')mMd')](_0x996323[_0x46cfab(0x233, 'C2Mi')](_0x996323['gmVHp'](_0x996323[_0x46cfab(0x37b, 'R6hL')](_0x996323[_0x46cfab(0x35b, '$D]7')], this['level']), _0x996323['DJNiD']), this[_0x46cfab(0x455, 'BKRQ')][_0x46cfab(0x49b, '5#b#')]), '/'), this[_0x46cfab(0x4c1, '9%h1')][_0x46cfab(0x4ca, 'ht[S') + 'ves']), _0x996323[_0x46cfab(0x3bc, '(9zh')]); continue; }break; } } else { if (this['flood']['isOve' + 'r']()) { if (_0x996323['tqkZG'](_0x996323['Uvtzp'], _0x996323['FYoGQ'])) { function _0x3ca943() { const _0xf50fdb = _0x46cfab; if (_0x996323['pVVuU'](_0xc9009a, this[_0xf50fdb(0x2fa, 's$qC') + _0xf50fdb(0x484, '#AE9')]) || _0x996323[_0xf50fdb(0x269, 'cmn3')](this[_0xf50fdb(0x490, 'cIA3') + 'Color'], -0x1)) return; this[_0xf50fdb(0x455, 'BKRQ') + _0xf50fdb(0x299, 'agg!')](0x0, 0x0, this[_0xf50fdb(0x4d4, 'd9#K') + _0xf50fdb(0x40d, '#Dbn')], _0x95106d), this[_0xf50fdb(0x4d4, 'd9#K') + _0xf50fdb(0x225, 'O3gn')] = _0x30708b, this[_0xf50fdb(0x43d, '(hEz')]++; } } else { const _0x4c0eda = _0x996323['GpHwx']['split']('|'); let _0x4af7f4 = 0x0; while (!![]) { switch (_0x4c0eda[_0x4af7f4++]) { case '0': _0x2c389d[_0x46cfab(0x4d1, '!#XP') + 'onten' + 't'] = _0x996323[_0x46cfab(0x3ca, 'cIA3')]; continue; case '1': _0x996323['CGYLN'](triggerWave); continue; case '2': this[_0x46cfab(0x3e2, '5#b#')] = !![]; continue; case '3': document[_0x46cfab(0x3c1, 'cmn3') + _0x46cfab(0x267, '^#Is') + _0x46cfab(0x2b9, 'wgx$') + 'r'](_0x996323[_0x46cfab(0x28f, 's$qC')], _0x97deae => this[_0x46cfab(0x310, 'cvSh') + 'eInpu' + 't'](_0x97deae, this), { 'once': !![] }); continue; case '4': _0x996323[_0x46cfab(0x31e, ')mMd')](gaTrack, 0x0, this['level']); continue; }break; } } } else { } } } [_0x40a883(0x1f5, 'BKRQ') + _0x40a883(0x1ef, 'V]UV') + 't'](_0x5ef0fb, _0x2660ba) { const _0x7cc0db = _0x40a883, _0x5997a6 = { 'Raixd': 'mouse' + _0x7cc0db(0x256, '!#XP'), 'vWBFN': _0x7cc0db(0x1e3, 'PTCx') + 'ge' }; document[_0x7cc0db(0x390, '2cY2') + _0x7cc0db(0x1ed, 'mzz]') + _0x7cc0db(0x270, 'x1o9') + _0x7cc0db(0x4ff, 'yyQ5')](_0x5997a6['Raixd'], _0x2660ba['handl' + 'eInpu' + 't']); const _0x43cf45 = document['getEl' + _0x7cc0db(0x248, '20#*') + _0x7cc0db(0x388, 'CiSz')](_0x5997a6[_0x7cc0db(0x38b, '^#Is')]); _0x43cf45['inner' + _0x7cc0db(0x3dd, '20#*')] = '', _0x2660ba[_0x7cc0db(0x1fe, '$D]7') + 'me'](); } [_0x40a883(0x41d, 'cIA3') + 'r']() { const _0xc94fa0 = _0x40a883, _0x39dad9 = { 'FRjqJ': function (_0x5e092e, _0x54a5bc) { return _0x5e092e / _0x54a5bc; }, 'ornwe': function (_0x2d1c2c, _0x563229) { return _0x2d1c2c < _0x563229; }, 'ibAPy': function (_0x1ceeba, _0x188a97) { return _0x1ceeba < _0x188a97; }, 'PwHaj': function (_0xdb51c3, _0x415f0f) { return _0xdb51c3 === _0x415f0f; }, 'cgdYS': 'PqMeq', 'GdwPL': _0xc94fa0(0x499, 'C2Mi'), 'CPOMZ': function (_0x1c5f09, _0x18fcee) { return _0x1c5f09 === _0x18fcee; }, 'XVxeW': 'black', 'dGDOW': function (_0x21890c, _0x35d588) { return _0x21890c * _0x35d588; }, 'ymZuD': function (_0x236de2, _0x3f450b) { return _0x236de2 * _0x3f450b; }, 'mNdJs': function (_0x41194c, _0x35aac9) { return _0x41194c + _0x35aac9; }, 'wWoZn': '#fdfd' + 'fd', 'qFTfF': function (_0x13cdcf, _0x53f307) { return _0x13cdcf * _0x53f307; }, 'FzMCM': function (_0x409e90, _0x3f7460) { return _0x409e90 * _0x3f7460; }, 'xDQFt': _0xc94fa0(0x4db, '(9zh'), 'amXNY': function (_0x3fdeea, _0x3e7a68) { return _0x3fdeea / _0x3e7a68; }, 'RUIkq': function (_0x325d2f, _0x162127) { return _0x325d2f * _0x162127; }, 'IASIV': function (_0x2d9b31, _0x573538) { return _0x2d9b31 > _0x573538; }, 'mGItv': function (_0x548d5c, _0xc8fd8d) { return _0x548d5c * _0xc8fd8d; }, 'DYNkY': function (_0x3072c2, _0x35fe22) { return _0x3072c2 / _0x35fe22; } }, _0x50fa1d = _0x39dad9[_0xc94fa0(0x48a, 'yyQ5')](this[_0xc94fa0(0x3cc, 'cmn3') + 's']['width'], this[_0xc94fa0(0x4c1, '9%h1')][_0xc94fa0(0x258, 'wgx$')]); this[_0xc94fa0(0x4ac, 'mzz]')]['clear' + _0xc94fa0(0x4d9, 'Y)xy')](0x0, 0x0, this[_0xc94fa0(0x27b, '$D]7') + 's'][_0xc94fa0(0x3c6, 'mzz]')], this[_0xc94fa0(0x2c3, 'yRJS') + 's']['width']), this[_0xc94fa0(0x403, '$Bna')][_0xc94fa0(0x298, 'yRJS') + _0xc94fa0(0x473, 'cvSh')](); for (let _0x579e2b = 0x0; _0x39dad9['ornwe'](_0x579e2b, this[_0xc94fa0(0x373, 'PTCx')][_0xc94fa0(0x2e2, '$D]7')]); _0x579e2b++) { for (let _0x1d00c6 = 0x0; _0x39dad9[_0xc94fa0(0x21e, 'yyQ5')](_0x1d00c6, this[_0xc94fa0(0x371, 'yIt7')][_0xc94fa0(0x4da, '5$xj')]); _0x1d00c6++) { if (_0x39dad9[_0xc94fa0(0x27c, 'Nb[n')](_0x39dad9[_0xc94fa0(0x47b, '#AE9')], _0x39dad9[_0xc94fa0(0x223, 'B8C%')])) { function _0x37c5c3() { const _0x219235 = _0xc94fa0; this[_0x219235(0x3fc, '0mty')] = ![]; } } else { if (_0x39dad9['CPOMZ'](this[_0xc94fa0(0x383, 'V]UV')][_0xc94fa0(0x1f9, 'k1il')][_0x579e2b][_0x1d00c6], -0x1)) this['ctx'][_0xc94fa0(0x249, 'SmxQ') + 'tyle'] = _0x39dad9[_0xc94fa0(0x2b4, '(9zh')]; else { const _0x227c65 = this[_0xc94fa0(0x34c, 'B8C%')][_0xc94fa0(0x2a5, 'C4Fl') + _0xc94fa0(0x306, '!#XP') + 'arGra' + _0xc94fa0(0x411, '$Bna')](0x0, _0x39dad9['dGDOW'](_0x579e2b, _0x50fa1d), 0x0, _0x39dad9['ymZuD'](_0x39dad9[_0xc94fa0(0x44d, '$D]7')](_0x579e2b, 0.1), _0x50fa1d)); _0x227c65[_0xc94fa0(0x213, 'o)(L') + _0xc94fa0(0x321, 'k1il') + 'op'](0x0, _0x39dad9[_0xc94fa0(0x3bb, '#AE9')]), _0x227c65[_0xc94fa0(0x448, 'Y)xy') + 'lorSt' + 'op'](0x1, Game[_0xc94fa0(0x3fb, '5#b#') + _0xc94fa0(0x2c1, 'Y)xy')](this[_0xc94fa0(0x33b, 'd9#K')][_0xc94fa0(0x35f, 'yIt7')][_0x579e2b][_0x1d00c6])), this[_0xc94fa0(0x22f, '(hEz')][_0xc94fa0(0x4ea, '#AE9') + _0xc94fa0(0x32d, 'cmn3')] = _0x227c65; } this[_0xc94fa0(0x240, '][()')][_0xc94fa0(0x237, '5#b#') + _0xc94fa0(0x475, '(9zh')](_0x39dad9[_0xc94fa0(0x3b0, '#Dbn')](_0x1d00c6, _0x50fa1d), _0x39dad9[_0xc94fa0(0x329, 'R6hL')](_0x579e2b, _0x50fa1d), _0x50fa1d, _0x50fa1d), this[_0xc94fa0(0x354, '0mty')]['strok' + 'eStyl' + 'e'] = _0x39dad9[_0xc94fa0(0x3f2, '!#XP')], this[_0xc94fa0(0x1ff, 'V]UV')][_0xc94fa0(0x1e2, '(9zh') + _0xc94fa0(0x29e, '7zlP')] = _0x39dad9[_0xc94fa0(0x288, 'C4Fl')](_0x50fa1d, 0x14), this[_0xc94fa0(0x369, 'Y)xy')][_0xc94fa0(0x423, 'PTCx') + 'eRect'](_0x39dad9[_0xc94fa0(0x1e9, 'd9#K')](_0x1d00c6, _0x50fa1d), _0x39dad9[_0xc94fa0(0x38d, 'dyQ(')](_0x579e2b, _0x50fa1d), _0x50fa1d, _0x50fa1d), _0x39dad9['IASIV'](_0x50fa1d, 0x28) && this['ctx']['round' + _0xc94fa0(0x48e, 'cvSh')](_0x39dad9[_0xc94fa0(0x1e9, 'd9#K')](_0x1d00c6, _0x50fa1d), _0x39dad9['mGItv'](_0x579e2b, _0x50fa1d), _0x50fa1d, _0x50fa1d, _0x39dad9[_0xc94fa0(0x397, '$Bna')](_0x50fa1d, 0xf)); } } } this['ctx']['strok' + 'e'](); } static [_0x40a883(0x46b, 'B8C%') + _0x40a883(0x25f, 'C2Mi')](_0x25a13e) { const _0x2f9296 = _0x40a883, _0x2671ed = { 'FPPyh': _0x2f9296(0x398, 's$qC') + '50', 'BPYvO': _0x2f9296(0x4d6, 'Dk%u') + 'f5', 'UpzFw': _0x2f9296(0x259, 'cIA3') + '6a', 'qbDoa': _0x2f9296(0x2bb, '$Bna') + '26', 'yvRMD': _0x2f9296(0x3e5, '9%h1') + 'fc', 'Zckbd': _0x2f9296(0x4e2, 'V]UV') + 'bc', 'mJMOt': '#26c6' + 'da', 'PdCvj': function (_0x4710da, _0x4085cf) { return _0x4710da % _0x4085cf; } }, _0x17e750 = [_0x2671ed['FPPyh'], _0x2671ed[_0x2f9296(0x4ad, 'ht[S')], _0x2671ed[_0x2f9296(0x46d, 'V]UV')], _0x2671ed['qbDoa'], _0x2671ed['yvRMD'], _0x2671ed['Zckbd'], _0x2671ed[_0x2f9296(0x401, 'PTCx')]]; return _0x17e750[_0x2671ed[_0x2f9296(0x36c, 'ht[S')](_0x25a13e, _0x17e750[_0x2f9296(0x252, '0UXn') + 'h'])]; } } function triggerWave() { const _0x37cf0a = _0x40a883, _0x2402d7 = { 'LIDYZ': _0x37cf0a(0x376, 'yyQ5') + 'activ' + 'e', 'FroKB': _0x37cf0a(0x1e7, '9%h1') + _0x37cf0a(0x3e3, '][()'), 'tJSXc': function (_0xf16b90, _0x2e3c4a, _0xc6d17) { return _0xf16b90(_0x2e3c4a, _0xc6d17); } }, _0x4cad2a = document[_0x37cf0a(0x1f4, '!#XP') + _0x37cf0a(0x243, '$Bna') + _0x37cf0a(0x38c, '#AE9')](_0x2402d7[_0x37cf0a(0x363, '7zlP')]); _0x4cad2a[_0x37cf0a(0x41e, '0Ta%') + _0x37cf0a(0x3a0, 'mzz]')][_0x37cf0a(0x44e, 'C2Mi')](_0x2402d7[_0x37cf0a(0x4f1, '(hEz')]), _0x2402d7[_0x37cf0a(0x4cb, 'mzz]')](setTimeout, () => { const _0x5c4c91 = _0x37cf0a; _0x4cad2a[_0x5c4c91(0x2b8, '5$xj') + 'List'][_0x5c4c91(0x297, 's$qC') + 'e'](_0x2402d7[_0x5c4c91(0x42f, 'DR9H')]); }, 0x3e8); } function getCookie(_0xb865ed) { const _0x6d4512 = _0x40a883, _0x14d896 = { 'gUXjh': function (_0x264170, _0x6f4e18) { return _0x264170 + _0x6f4e18; }, 'eePdk': function (_0x2aa8a6, _0x36e54a) { return _0x2aa8a6 + _0x36e54a; }, 'fTmhv': '(^|;)' + '\x5cs*', 'kUWYx': _0x6d4512(0x300, 'C4Fl') + _0x6d4512(0x3e0, '$Bna'), 'BjLhu': function (_0x1ba8d0, _0x2dea35) { return _0x1ba8d0(_0x2dea35); } }, _0x58d72f = document[_0x6d4512(0x221, 'Y)xy') + 'e']['match'](new RegExp(_0x14d896['gUXjh'](_0x14d896['eePdk'](_0x14d896['fTmhv'], _0xb865ed), _0x14d896[_0x6d4512(0x205, 'SmxQ')]))); return _0x58d72f ? _0x14d896[_0x6d4512(0x47d, 'C2Mi')](decodeURIComponent, _0x58d72f[0x2]) : ''; } function setCookie(_0x226be0, _0x59c4cd, _0x4be609) { const _0x4b13d7 = _0x40a883, _0x1dfdc9 = { 'cPpPK': function (_0x52d30b, _0x414dd6) { return _0x52d30b + _0x414dd6; }, 'HcbMn': function (_0xc555d0, _0x36041c) { return _0xc555d0 * _0x36041c; }, 'ksEWs': function (_0x4a41ff, _0x113cd) { return _0x4a41ff * _0x113cd; }, 'HGnbD': function (_0x442ba1, _0x26f0ea) { return _0x442ba1 * _0x26f0ea; }, 'AMNny': _0x4b13d7(0x2f3, '5#b#') + _0x4b13d7(0x35a, 'R6hL'), 'okbSj': function (_0x2ccc87, _0x5f3f22) { return _0x2ccc87 + _0x5f3f22; }, 'FhLrJ': function (_0x35a735, _0xbd2715) { return _0x35a735 + _0xbd2715; }, 'cWUMQ': function (_0x489dc8, _0x22dcfd) { return _0x489dc8 + _0x22dcfd; }, 'hUMUY': ';\x20pat' + 'h=/' }; var _0x1447d8 = new Date(); _0x1447d8[_0x4b13d7(0x309, 'agg!') + 'me'](_0x1dfdc9[_0x4b13d7(0x466, '0mty')](_0x1447d8[_0x4b13d7(0x2e7, '9%h1') + 'me'](), _0x1dfdc9[_0x4b13d7(0x312, 'BKRQ')](_0x1dfdc9[_0x4b13d7(0x242, 'CiSz')](_0x1dfdc9[_0x4b13d7(0x3a9, '5$xj')](_0x1dfdc9['HGnbD'](_0x4be609, 0x18), 0x3c), 0x3c), 0x3e8))); var _0x1fc5b2 = _0x1dfdc9['cPpPK'](_0x1dfdc9[_0x4b13d7(0x20f, 'yyQ5')], _0x1447d8[_0x4b13d7(0x30e, 'BKRQ') + 'Strin' + 'g']()); document[_0x4b13d7(0x1f6, '5$xj') + 'e'] = _0x1dfdc9[_0x4b13d7(0x29c, '20#*')](_0x1dfdc9['okbSj'](_0x1dfdc9[_0x4b13d7(0x21c, 'Y)xy')](_0x1dfdc9[_0x4b13d7(0x2e1, '][()')](_0x1dfdc9[_0x4b13d7(0x3ba, 'cvSh')](_0x226be0, '='), _0x59c4cd), ';\x20'), _0x1fc5b2), _0x1dfdc9[_0x4b13d7(0x3d9, 'o)(L')]); } function gaTrack(_0x29f4dd, _0x3a570e) { const _0x45bc94 = _0x40a883, _0x5ae93c = { 'mDugd': function (_0xa25027, _0x3499e7) { return _0xa25027 * _0x3499e7; }, 'ntDkC': function (_0x4334aa, _0x316d11) { return _0x4334aa * _0x316d11; }, 'Euhkn': function (_0x32cf34, _0x216d16) { return _0x32cf34 + _0x216d16; }, 'wOZKO': _0x45bc94(0x2d4, '#AE9') + 'fd', 'MYYSP': function (_0x293c16, _0x550b2a) { return _0x293c16 !== _0x550b2a; }, 'DyNQt': 'BxUix', 'FxJmL': function (_0x4e570d, _0x55e36a) { return _0x4e570d + _0x55e36a; }, 'BLAiU': function (_0x3a9fa0, _0x31f68d) { return _0x3a9fa0 + _0x31f68d; }, 'mZtEU': _0x45bc94(0x2eb, 'yIt7') + _0x45bc94(0x20b, 'd9#K') + _0x45bc94(0x4dd, '7zlP') + 'lback' + _0x45bc94(0x3c3, 'DR9H') + _0x45bc94(0x3b6, '9%h1') + 'mplet' + 'e', 'qCpRA': function (_0xd86f93, _0x221bc9) { return _0xd86f93 < _0x221bc9; }, 'vJLsd': function (_0x31d788, _0x49eb5a) { return _0x31d788 !== _0x49eb5a; }, 'DTcrm': function (_0x157018, _0x512ba4) { return _0x157018 !== _0x512ba4; }, 'MMRiD': function (_0x32a674, _0x2ec4a4) { return _0x32a674 === _0x2ec4a4; }, 'bFyrx': _0x45bc94(0x4f9, '7zlP'), 'MdcKW': function (_0x3103bc, _0x190e11) { return _0x3103bc + _0x190e11; }, 'jMobO': function (_0x472d8f, _0x3290b4) { return _0x472d8f + _0x3290b4; }, 'Envlw': _0x45bc94(0x427, 'yyQ5') + _0x45bc94(0x4a3, ')mMd') + _0x45bc94(0x4a7, 'O3gn') + _0x45bc94(0x450, '#AE9') + _0x45bc94(0x3cf, 'R6hL') + _0x45bc94(0x2f9, '5#b#') + 'r', 'ktoDb': function (_0x4252f1, _0xc72b67) { return _0x4252f1 == _0xc72b67; }, 'ijPRR': _0x45bc94(0x4e3, 'cmn3'), 'UCxGh': _0x45bc94(0x1f2, 'd9#K'), 'gkcsB': function (_0xcc060e, _0x28b436, _0x2b0095, _0x1360e1) { return _0xcc060e(_0x28b436, _0x2b0095, _0x1360e1); }, 'zUMQL': _0x45bc94(0x39c, '(hEz'), 'yFyLf': 'level' + '_comp' + _0x45bc94(0x48d, '$D]7'), 'JNNKb': function (_0x10e533, _0x4396fa) { return _0x10e533 === _0x4396fa; }, 'dVYvt': 'pcumN', 'Lpfwr': _0x45bc94(0x3aa, '0UXn'), 'mycbO': function (_0x42a84f, _0x4c9f2f, _0x2ff804, _0x544c56) { return _0x42a84f(_0x4c9f2f, _0x2ff804, _0x544c56); }, 'kvnfN': 'game_' + 'over' }; if (_0x5ae93c[_0x45bc94(0x232, 'C4Fl')](_0x29f4dd, 0x1)) { if (_0x5ae93c[_0x45bc94(0x272, '0UXn')](_0x5ae93c['ijPRR'], _0x5ae93c[_0x45bc94(0x42e, 'cvSh')])) { function _0xa45930() { const _0x25efd4 = _0x45bc94, _0xd54a1d = this['ctx']['creat' + _0x25efd4(0x35d, 'Nb[n') + 'arGra' + _0x25efd4(0x404, 'Nb[n')](0x0, _0x5ae93c[_0x25efd4(0x2ca, 'agg!')](_0x19955c, _0x2bd66b), 0x0, _0x5ae93c['ntDkC'](_0x5ae93c[_0x25efd4(0x49f, '9%h1')](_0x1351ff, 0.1), _0x300418)); _0xd54a1d['addCo' + _0x25efd4(0x3ce, 'Y)xy') + 'op'](0x0, _0x5ae93c[_0x25efd4(0x23a, '][()')]), _0xd54a1d[_0x25efd4(0x2ce, '(hEz') + 'lorSt' + 'op'](0x1, _0x2b1209[_0x25efd4(0x4e4, 'PTCx') + _0x25efd4(0x325, 'k1il')](this[_0x25efd4(0x3a2, 'cvSh')][_0x25efd4(0x2b6, 'C2Mi')][_0x2868e7][_0x8e5173])), this['ctx'][_0x25efd4(0x39b, 'Dk%u') + _0x25efd4(0x42c, '][()')] = _0xd54a1d; } } else _0x5ae93c['gkcsB'](gtag, _0x5ae93c['zUMQL'], _0x5ae93c['yFyLf'], { 'level': _0x3a570e, 'event_callback': function () { const _0x568c20 = _0x45bc94; if (_0x5ae93c[_0x568c20(0x1eb, '5$xj')](_0x5ae93c[_0x568c20(0x33a, 'Nb[n')], _0x5ae93c[_0x568c20(0x4f2, '(hEz')])) { function _0x4b4dd4() { _0x50aca9 ? _0x537a88++ : _0x42309a++; } } else console[_0x568c20(0x391, '(9zh')](_0x5ae93c['FxJmL'](_0x5ae93c[_0x568c20(0x394, 'O3gn')](_0x5ae93c[_0x568c20(0x315, 'dyQ(')](_0x5ae93c['mZtEU'], _0x29f4dd), '/'), _0x3a570e)); } }); } else { if (_0x5ae93c[_0x45bc94(0x328, '0mty')](_0x5ae93c[_0x45bc94(0x2db, '20#*')], _0x5ae93c['Lpfwr'])) { function _0x40cb8a() { const _0x5057b0 = _0x45bc94; return this[_0x5057b0(0x3e6, 'dyQ(')][_0x5057b0(0x202, 'k1il') + _0x5057b0(0x28e, '#AE9') + 'd'](); } } else _0x5ae93c['mycbO'](gtag, _0x5ae93c['zUMQL'], _0x5ae93c[_0x45bc94(0x500, 'k1il')], { 'level': _0x3a570e, 'event_callback': function () { const _0x4bd795 = _0x45bc94, _0x18f4c1 = { 'Azljs': function (_0x96a430, _0x11fda5) { const _0x3e106a = _0x24a4; return _0x5ae93c[_0x3e106a(0x3eb, 'cmn3')](_0x96a430, _0x11fda5); }, 'WZfvn': function (_0x10d642, _0xf0c291) { return _0x5ae93c['vJLsd'](_0x10d642, _0xf0c291); }, 'pMLQl': function (_0x209c95, _0x363575) { const _0x2d0e79 = _0x24a4; return _0x5ae93c[_0x2d0e79(0x3d3, 'ht[S')](_0x209c95, _0x363575); } }; if (_0x5ae93c[_0x4bd795(0x2a3, '$D]7')](_0x5ae93c['bFyrx'], _0x5ae93c[_0x4bd795(0x46c, 'PTCx')])) console[_0x4bd795(0x31f, 'BKRQ')](_0x5ae93c['BLAiU'](_0x5ae93c['MdcKW'](_0x5ae93c['jMobO'](_0x5ae93c[_0x4bd795(0x42b, '0Ta%')], _0x29f4dd), '/'), _0x3a570e)); else { function _0x230d93() { const _0x535f64 = _0x4bd795; for (let _0x530d2b = 0x0; _0x18f4c1[_0x535f64(0x447, 'R6hL')](_0x530d2b, this[_0x535f64(0x4c7, 'R6hL')]); _0x530d2b++) { if (_0x18f4c1[_0x535f64(0x396, 's$qC')](this[_0x535f64(0x222, '(hEz')][_0x36c614][_0x530d2b], this[_0x535f64(0x412, 'DR9H') + 'Color']) && _0x18f4c1[_0x535f64(0x23c, 'O3gn')](this[_0x535f64(0x32c, 'BKRQ')][_0x3ebcc2][_0x530d2b], -0x1)) return ![]; } } } } }); } } function _0x24a4(_0x4372a0, _0x21811f) { _0x4372a0 = _0x4372a0 - 0x1dd; let _0x4d283f = _0x3adb[_0x4372a0]; if (_0x24a4['TmnZir'] === undefined) { var _0x2c697f = function (_0x35c9ac) { const _0x426abe = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/='; let _0x23b8fd = ''; for (let _0x323840 = 0x0, _0x76c88c, _0x1c33be, _0x288738 = 0x0; _0x1c33be = _0x35c9ac['charAt'](_0x288738++); ~_0x1c33be && (_0x76c88c = _0x323840 % 0x4 ? _0x76c88c * 0x40 + _0x1c33be : _0x1c33be, _0x323840++ % 0x4) ? _0x23b8fd += String['fromCharCode'](0xff & _0x76c88c >> (-0x2 * _0x323840 & 0x6)) : 0x0) { _0x1c33be = _0x426abe['indexOf'](_0x1c33be); } return _0x23b8fd; }; const _0x24a498 = function (_0x6e0926, _0x5638c4) { let _0x466bba = [], _0x24f108 = 0x0, _0x213428, _0x267dad = '', _0x4b8f60 = ''; _0x6e0926 = _0x2c697f(_0x6e0926); for (let _0x3cfa30 = 0x0, _0x51ee87 = _0x6e0926['length']; _0x3cfa30 < _0x51ee87; _0x3cfa30++) { _0x4b8f60 += '%' + ('00' + _0x6e0926['charCodeAt'](_0x3cfa30)['toString'](0x10))['slice'](-0x2); } _0x6e0926 = decodeURIComponent(_0x4b8f60); let _0x3a795c; for (_0x3a795c = 0x0; _0x3a795c < 0x100; _0x3a795c++) { _0x466bba[_0x3a795c] = _0x3a795c; } for (_0x3a795c = 0x0; _0x3a795c < 0x100; _0x3a795c++) { _0x24f108 = (_0x24f108 + _0x466bba[_0x3a795c] + _0x5638c4['charCodeAt'](_0x3a795c % _0x5638c4['length'])) % 0x100, _0x213428 = _0x466bba[_0x3a795c], _0x466bba[_0x3a795c] = _0x466bba[_0x24f108], _0x466bba[_0x24f108] = _0x213428; } _0x3a795c = 0x0, _0x24f108 = 0x0; for (let _0x1b7907 = 0x0; _0x1b7907 < _0x6e0926['length']; _0x1b7907++) { _0x3a795c = (_0x3a795c + 0x1) % 0x100, _0x24f108 = (_0x24f108 + _0x466bba[_0x3a795c]) % 0x100, _0x213428 = _0x466bba[_0x3a795c], _0x466bba[_0x3a795c] = _0x466bba[_0x24f108], _0x466bba[_0x24f108] = _0x213428, _0x267dad += String['fromCharCode'](_0x6e0926['charCodeAt'](_0x1b7907) ^ _0x466bba[(_0x466bba[_0x3a795c] + _0x466bba[_0x24f108]) % 0x100]); } return _0x267dad; }; _0x24a4['imqURN'] = _0x24a498, _0x24a4['fHciqh'] = {}, _0x24a4['TmnZir'] = !![]; } const _0x12fc48 = _0x3adb[0x0], _0x22dfb4 = _0x4372a0 + _0x12fc48, _0x3adbfb = _0x24a4['fHciqh'][_0x22dfb4]; return _0x3adbfb === undefined ? (_0x24a4['oPVoZz'] === undefined && (_0x24a4['oPVoZz'] = !![]), _0x4d283f = _0x24a4['imqURN'](_0x4d283f, _0x21811f), _0x24a4['fHciqh'][_0x22dfb4] = _0x4d283f) : _0x4d283f = _0x3adbfb, _0x4d283f; } new Game(_0x40a883(0x2ae, 'cmn3') + _0x40a883(0x207, '!#XP'));
+        const _0x237991 = _0x1b04; (function (_0x40b02d, _0x1a25bd) { const _0x16714b = _0x1b04, _0x63331 = _0x40b02d(); while (!![]) { try { const _0x3db5e1 = parseInt(_0x16714b(0x1d9)) / 0x1 + -parseInt(_0x16714b(0x1e7)) / 0x2 + -parseInt(_0x16714b(0x23a)) / 0x3 + -parseInt(_0x16714b(0x212)) / 0x4 + parseInt(_0x16714b(0x1cb)) / 0x5 * (-parseInt(_0x16714b(0x1d7)) / 0x6) + -parseInt(_0x16714b(0x1ed)) / 0x7 + parseInt(_0x16714b(0x1f6)) / 0x8 * (parseInt(_0x16714b(0x210)) / 0x9); if (_0x3db5e1 === _0x1a25bd) break; else _0x63331['push'](_0x63331['shift']()); } catch (_0x3c663f) { _0x63331['push'](_0x63331['shift']()); } } }(_0x6bb7, 0x6dea3)); class Flood { constructor(_0x4a99fa, _0x343629) { const _0x248899 = _0x1b04; this[_0x248899(0x218)] = _0x4a99fa, this[_0x248899(0x1ce)] = _0x343629, this['minSize'] = 0x6, this[_0x248899(0x237)] = 0x3, this['maxMoves'] = 0x19, this[_0x248899(0x201)] = 0x1, this[_0x248899(0x237)] = 0x5; } [_0x237991(0x1d4)](_0x20b15e) { const _0x35e7c5 = _0x237991; this['moves'] = 0x0, this[_0x35e7c5(0x1e8)] = _0x20b15e, this[_0x35e7c5(0x215)] = [], this['size'] = this[_0x35e7c5(0x1e8)] + this[_0x35e7c5(0x229)]; if (this[_0x35e7c5(0x1e8)] > 0x64) this[_0x35e7c5(0x217)] = Math[_0x35e7c5(0x1d0)](this[_0x35e7c5(0x1e8)] * 0.25 + 0x54); else { if (this[_0x35e7c5(0x1e8)] > 0x32) this[_0x35e7c5(0x217)] = Math['floor'](this[_0x35e7c5(0x1e8)] * 0.85 + 0x12); else this[_0x35e7c5(0x1e8)] > 0x19 ? this[_0x35e7c5(0x217)] = Math[_0x35e7c5(0x1d0)](this[_0x35e7c5(0x1e8)] * 0.95 + 0xf) : this[_0x35e7c5(0x217)] = Math[_0x35e7c5(0x1d0)](this['level'] * 1.1 + 0xb); } this['initGrid'](), this[_0x35e7c5(0x20c)] = this['cells'][0x0][0x0]; } [_0x237991(0x1db)]() { const _0xcef7f3 = _0x237991; let _0x3116ec = []; for (let _0xbc9178 = 0x0; _0xbc9178 < this[_0xcef7f3(0x218)]; _0xbc9178++) { _0x3116ec[_0xbc9178] = []; for (let _0xe14948 = 0x0; _0xe14948 < this[_0xcef7f3(0x218)]; _0xe14948++) { _0x3116ec[_0xbc9178][_0xe14948] = Math[_0xcef7f3(0x1d0)](Math[_0xcef7f3(0x1ca)]() * this[_0xcef7f3(0x1ce)]); } } for (let _0x3e9051 = 0x0; _0x3e9051 < this[_0xcef7f3(0x218)]; _0x3e9051++) { for (let _0x548eed = 0x0; _0x548eed < this['size']; _0x548eed++) { const _0x44beee = Math[_0xcef7f3(0x1d0)](Math[_0xcef7f3(0x1ca)]() * 0x5); _0x3116ec[_0x3e9051][_0x548eed] !== _0x44beee && (_0x548eed > 0x0 && _0x3116ec[_0x3e9051][_0x548eed - 0x1] === _0x44beee && (_0x3116ec[_0x3e9051][_0x548eed] = _0x44beee), _0x548eed < this[_0xcef7f3(0x218)] - 0x1 && _0x3116ec[_0x3e9051][_0x548eed + 0x1] === _0x44beee && (_0x3116ec[_0x3e9051][_0x548eed] = _0x44beee), _0x3e9051 > 0x0 && _0x3116ec[_0x3e9051 - 0x1][_0x548eed] === _0x44beee && (_0x3116ec[_0x3e9051][_0x548eed] = _0x44beee), _0x3e9051 < this[_0xcef7f3(0x218)] - 0x1 && _0x3116ec[_0x3e9051 + 0x1][_0x548eed] === _0x44beee && (_0x3116ec[_0x3e9051][_0x548eed] = _0x44beee)); } } if (this[_0xcef7f3(0x1e8)] >= this['minObstLevel'] && this[_0xcef7f3(0x201)] > 0x0) { const _0x357484 = Math[_0xcef7f3(0x1d0)](Math[_0xcef7f3(0x1ca)]() * this[_0xcef7f3(0x1e8)] * (0x1 + this[_0xcef7f3(0x201)] / 0x8)); let _0x50d44c = Math[_0xcef7f3(0x1d0)](this[_0xcef7f3(0x218)] / 0x2 - _0x357484 / 0x3), _0x269918 = _0x50d44c; const _0xf9d211 = Math[_0xcef7f3(0x1ca)]() > 0.5; for (let _0x3a0c9b = 0x0; _0x3a0c9b < _0x357484; _0x3a0c9b++) { if (_0x3a0c9b <= _0x357484 / 0x3) _0xf9d211 ? _0x50d44c++ : _0x269918++; else _0x3a0c9b >= _0x357484 / 0x3 && _0x3a0c9b <= _0x357484 / 0x3 * 0x2 ? _0xf9d211 ? _0x269918++ : _0x50d44c++ : _0xf9d211 ? _0x50d44c++ : _0x269918++; _0x50d44c < this[_0xcef7f3(0x218)] && _0x269918 < this[_0xcef7f3(0x218)] && _0x50d44c >= 0x0 && _0x269918 >= 0x0 && (_0x3116ec[_0x50d44c][_0x269918] = -0x1); } } this['cells'] = _0x3116ec; } [_0x237991(0x1e6)](_0x2a5b07) { const _0x25684e = _0x237991; if (_0x2a5b07 === this[_0x25684e(0x20c)] || this[_0x25684e(0x20c)] === -0x1) return; this[_0x25684e(0x1d6)](0x0, 0x0, this['startColor'], _0x2a5b07), this[_0x25684e(0x20c)] = _0x2a5b07, this[_0x25684e(0x219)]++; } [_0x237991(0x1d6)](_0x2a153c, _0x5736c6, _0x22f6c3, _0x2e5552) { const _0x49d123 = _0x237991; if (_0x2a153c < 0x0 || _0x5736c6 < 0x0 || _0x2a153c >= this[_0x49d123(0x218)] || _0x5736c6 >= this[_0x49d123(0x218)]) return; if (this[_0x49d123(0x215)][_0x5736c6][_0x2a153c] !== _0x22f6c3) return; this['cells'][_0x5736c6][_0x2a153c] = _0x2e5552, this['floodFill'](_0x2a153c + 0x1, _0x5736c6, _0x22f6c3, _0x2e5552), this['floodFill'](_0x2a153c - 0x1, _0x5736c6, _0x22f6c3, _0x2e5552), this[_0x49d123(0x1d6)](_0x2a153c, _0x5736c6 + 0x1, _0x22f6c3, _0x2e5552), this[_0x49d123(0x1d6)](_0x2a153c, _0x5736c6 - 0x1, _0x22f6c3, _0x2e5552); } [_0x237991(0x22a)]() { const _0x509986 = _0x237991; return this[_0x509986(0x219)] >= this[_0x509986(0x217)] && !this['isCompleted'](); } [_0x237991(0x23b)]() { const _0x1b04ee = _0x237991; for (let _0x21dc1f = 0x0; _0x21dc1f < this[_0x1b04ee(0x218)]; _0x21dc1f++) { for (let _0x8f1034 = 0x0; _0x8f1034 < this[_0x1b04ee(0x218)]; _0x8f1034++) { if (this['cells'][_0x21dc1f][_0x8f1034] !== this[_0x1b04ee(0x20c)] && this[_0x1b04ee(0x215)][_0x21dc1f][_0x8f1034] !== -0x1) return ![]; } } return !![]; } [_0x237991(0x205)]() { const _0x243247 = _0x237991; console[_0x243247(0x1fd)](_0x243247(0x20d)); for (let _0x2c7e64 = 0x0; _0x2c7e64 < this[_0x243247(0x218)]; _0x2c7e64++) { console['log'](this[_0x243247(0x215)][_0x2c7e64]['join']('\x20')); } } } class Game { constructor(_0x1d760f, _0x6ea39a = 0xa, _0x1704a8 = 0x28) { const _0x24967c = _0x237991; this[_0x24967c(0x22f)] = document[_0x24967c(0x1d2)](_0x1d760f), this[_0x24967c(0x232)] = this[_0x24967c(0x22f)][_0x24967c(0x1d5)]('2d'), this[_0x24967c(0x230)](), this['flood'] = new Flood(0x8, 0x6), this['moves'] = 0x0, this[_0x24967c(0x217)] = 0x19, this[_0x24967c(0x1e8)] = 0x1; const _0x563fe1 = getCookie(_0x24967c(0x1e8)); _0x563fe1 && (this['level'] = Number(_0x563fe1)); this[_0x24967c(0x20f)] = 0x1; const _0x22b019 = getCookie('totalgames'); _0x22b019 && (this[_0x24967c(0x20f)] = Number(_0x22b019)), this[_0x24967c(0x1d4)](), this[_0x24967c(0x224)] = ![]; } [_0x237991(0x1d4)]() { const _0x262d10 = _0x237991; this[_0x262d10(0x1e5)]['newGame'](this[_0x262d10(0x1e8)]), this[_0x262d10(0x235)](), this[_0x262d10(0x1eb)](); } ['isGameOver']() { const _0x58a388 = _0x237991; return this[_0x58a388(0x219)] >= this[_0x58a388(0x217)] && !this[_0x58a388(0x1e5)]['isCompleted'](); } [_0x237991(0x1e1)]() { const _0x56ce0e = _0x237991; return this[_0x56ce0e(0x1e5)][_0x56ce0e(0x23b)](); } [_0x237991(0x1eb)]() { const _0x166bf2 = _0x237991; $(_0x166bf2(0x1fe))['html'](this['level']), $('#games-stat')[_0x166bf2(0x225)](this[_0x166bf2(0x20f)]), $(_0x166bf2(0x222))[_0x166bf2(0x225)](this[_0x166bf2(0x1e8)] + '/&infin;'), $(_0x166bf2(0x207))[_0x166bf2(0x225)](this[_0x166bf2(0x1e5)][_0x166bf2(0x219)] + '/' + this[_0x166bf2(0x1e5)][_0x166bf2(0x217)]); } [_0x237991(0x230)]() { const _0x5cf207 = _0x237991; document[_0x5cf207(0x1e4)]('button[data-color]')[_0x5cf207(0x1d8)](_0xcc6e7e => { const _0x5403a2 = _0x5cf207, _0x59002c = parseInt(_0xcc6e7e[_0x5403a2(0x1f2)](_0x5403a2(0x238))); _0xcc6e7e['setAttribute'](_0x5403a2(0x1d1), _0x5403a2(0x206) + Game[_0x5403a2(0x234)](_0x59002c)); }), document[_0x5cf207(0x1e4)](_0x5cf207(0x21f))[_0x5cf207(0x1d8)](_0x6ca0cd => { const _0x4135d6 = _0x5cf207; _0x6ca0cd['addEventListener'](_0x4135d6(0x1f5), () => { const _0xe4b469 = _0x4135d6; if (this['break']) console['log'](_0xe4b469(0x1f1) + this[_0xe4b469(0x224)] + '\x20'), this[_0xe4b469(0x224)] = ![]; else { const _0x15af90 = parseInt(_0x6ca0cd[_0xe4b469(0x1f2)](_0xe4b469(0x238))); this[_0xe4b469(0x1ec)](_0x15af90); } }); }); const _0x4b6b25 = document[_0x5cf207(0x1d2)](_0x5cf207(0x20a)); _0x4b6b25[_0x5cf207(0x220)](_0x5cf207(0x1f5), _0x3fa102 => { const _0xd68b56 = _0x5cf207, _0x5c9f3b = window[_0xd68b56(0x214)](_0xd68b56(0x239)); if (_0x5c9f3b) this['level'] = 0x1, this[_0xd68b56(0x20f)] = 0x0, setCookie(_0xd68b56(0x1e8), this[_0xd68b56(0x1e8)], 0x1e), setCookie('totalgames', this[_0xd68b56(0x20f)], 0x1e), this['newGame'](), triggerWave(); else { } }); const _0x18b81d = document[_0x5cf207(0x1d2)]('level-reset'); _0x18b81d[_0x5cf207(0x220)]('click', _0x464f68 => { const _0x211201 = _0x5cf207; setCookie(_0x211201(0x21b), ++this[_0x211201(0x20f)], 0x1e), this[_0x211201(0x1d4)](), triggerWave(); }); const _0x30fd22 = document[_0x5cf207(0x1d2)](_0x5cf207(0x204)); _0x30fd22[_0x5cf207(0x220)](_0x5cf207(0x1f5), _0x302042 => { const _0x4cc1b1 = _0x5cf207; console[_0x4cc1b1(0x1fd)](_0x4cc1b1(0x233)), popupAbout(); }); const _0x4b6209 = document[_0x5cf207(0x1d2)](_0x5cf207(0x1e2)); _0x4b6209[_0x5cf207(0x220)](_0x5cf207(0x1f5), _0x5d8261 => { const _0x122be8 = _0x5cf207, _0x200f02 = _0x4b6209[_0x122be8(0x227)](), _0x28bba5 = _0x5d8261[_0x122be8(0x1cf)] - _0x200f02[_0x122be8(0x1cc)], _0x2e086a = _0x5d8261['clientY'] - _0x200f02[_0x122be8(0x1d3)], _0x22e6aa = _0x4b6209[_0x122be8(0x21c)] / this['flood'][_0x122be8(0x218)], _0x40fd9d = Math[_0x122be8(0x1d0)](_0x28bba5 / _0x22e6aa), _0x23de5b = Math[_0x122be8(0x1d0)](_0x2e086a / _0x22e6aa); this[_0x122be8(0x224)] ? this['break'] = ![] : this['makeMove'](this[_0x122be8(0x1e5)]['cells'][_0x23de5b][_0x40fd9d]); }); } [_0x237991(0x1ec)](_0x370295) { const _0x10472c = _0x237991; if (_0x370295 == -0x1) return; this[_0x10472c(0x1e5)]['setColor'](_0x370295), this[_0x10472c(0x219)]++, this[_0x10472c(0x224)] = ![], this[_0x10472c(0x235)](); const _0x4d62a1 = document[_0x10472c(0x1d2)]('message'); this[_0x10472c(0x1eb)](); if (this[_0x10472c(0x1e5)][_0x10472c(0x23b)]()) setCookie('totalgames', ++this[_0x10472c(0x20f)], 0x1e), gaTrack(0x1, this[_0x10472c(0x1e8)]), triggerWave(), _0x4d62a1[_0x10472c(0x202)] = _0x10472c(0x21a) + this[_0x10472c(0x1e8)] + _0x10472c(0x22d) + this['flood'][_0x10472c(0x219)] + '/' + this[_0x10472c(0x1e5)]['maxMoves'] + _0x10472c(0x1f0), this[_0x10472c(0x1e8)]++, setCookie('level', this[_0x10472c(0x1e8)], 0x1e), this[_0x10472c(0x224)] = !![], document[_0x10472c(0x220)](_0x10472c(0x211), _0x46ab88 => this[_0x10472c(0x1da)](_0x46ab88, this), { 'once': !![] }); else { if (this[_0x10472c(0x1e5)][_0x10472c(0x22a)]()) setCookie('totalgames', ++this[_0x10472c(0x20f)], 0x1e), gaTrack(0x0, this['level']), triggerWave(), _0x4d62a1[_0x10472c(0x1f7)] = _0x10472c(0x1e0), this[_0x10472c(0x224)] = !![], document['addEventListener'](_0x10472c(0x211), _0x266ec9 => this[_0x10472c(0x1da)](_0x266ec9, this), { 'once': !![] }); else { } } } ['handleInput'](_0x14b3cf, _0x18740e) { const _0x4043e5 = _0x237991; document[_0x4043e5(0x1f9)](_0x4043e5(0x211), _0x18740e[_0x4043e5(0x1da)]); const _0x4055c5 = document[_0x4043e5(0x1d2)](_0x4043e5(0x1e3)); _0x4055c5['innerHTML'] = '', _0x18740e[_0x4043e5(0x1d4)](); } ['render']() { const _0x5b33ef = _0x237991, _0x529c3f = this[_0x5b33ef(0x22f)][_0x5b33ef(0x1ff)] / this['flood']['size']; this[_0x5b33ef(0x232)][_0x5b33ef(0x1fa)](0x0, 0x0, this[_0x5b33ef(0x22f)][_0x5b33ef(0x1ff)], this[_0x5b33ef(0x22f)][_0x5b33ef(0x1ff)]), this[_0x5b33ef(0x232)][_0x5b33ef(0x1df)](); for (let _0x347790 = 0x0; _0x347790 < this[_0x5b33ef(0x1e5)]['size']; _0x347790++) { for (let _0x294df1 = 0x0; _0x294df1 < this[_0x5b33ef(0x1e5)][_0x5b33ef(0x218)]; _0x294df1++) { if (this[_0x5b33ef(0x1e5)][_0x5b33ef(0x215)][_0x347790][_0x294df1] === -0x1) this['ctx'][_0x5b33ef(0x1ef)] = 'black'; else { const _0x554710 = this[_0x5b33ef(0x232)][_0x5b33ef(0x1e9)](0x0, _0x347790 * _0x529c3f, 0x0, (_0x347790 + 0.1) * _0x529c3f); _0x554710['addColorStop'](0x0, '#fdfdfd'), _0x554710[_0x5b33ef(0x1dc)](0x1, Game[_0x5b33ef(0x234)](this['flood'][_0x5b33ef(0x215)][_0x347790][_0x294df1])), this[_0x5b33ef(0x232)]['fillStyle'] = _0x554710; } this['ctx'][_0x5b33ef(0x22b)](_0x294df1 * _0x529c3f, _0x347790 * _0x529c3f, _0x529c3f, _0x529c3f), this[_0x5b33ef(0x232)][_0x5b33ef(0x203)] = '#333', this[_0x5b33ef(0x232)]['lineWidth'] = _0x529c3f / 0x14, this[_0x5b33ef(0x232)]['strokeRect'](_0x294df1 * _0x529c3f, _0x347790 * _0x529c3f, _0x529c3f, _0x529c3f), _0x529c3f > 0x28 && this['ctx'][_0x5b33ef(0x1fc)](_0x294df1 * _0x529c3f, _0x347790 * _0x529c3f, _0x529c3f, _0x529c3f, _0x529c3f / 0xf); } } this[_0x5b33ef(0x232)][_0x5b33ef(0x1fb)](); } static ['colorMap'](_0x5ed786) { const _0x26b2da = _0x237991, _0x459485 = ['#ef5350', _0x26b2da(0x1ee), _0x26b2da(0x20b), '#ffa726', _0x26b2da(0x1ea), _0x26b2da(0x21d), _0x26b2da(0x228)]; return _0x459485[_0x5ed786 % _0x459485[_0x26b2da(0x209)]]; } } function triggerWave() { const _0x548641 = _0x237991, _0x2780cf = document[_0x548641(0x1d2)](_0x548641(0x226)); _0x2780cf[_0x548641(0x208)][_0x548641(0x236)]('wave-active'), setTimeout(() => { const _0xebda60 = _0x548641; _0x2780cf[_0xebda60(0x208)][_0xebda60(0x223)]('wave-active'); }, 0x3e8); } function getCookie(_0x11a1fd) { const _0x3503bf = _0x237991, _0x316de9 = document['cookie'][_0x3503bf(0x1f4)](new RegExp(_0x3503bf(0x22e) + _0x11a1fd + _0x3503bf(0x1f3))); return _0x316de9 ? decodeURIComponent(_0x316de9[0x2]) : ''; } function setCookie(_0x33eee8, _0x314cee, _0x2683f5) { const _0x32aeee = _0x237991; var _0x2ddab9 = new Date(); _0x2ddab9[_0x32aeee(0x231)](_0x2ddab9['getTime']() + _0x2683f5 * 0x18 * 0x3c * 0x3c * 0x3e8); var _0x1278b7 = _0x32aeee(0x200) + _0x2ddab9[_0x32aeee(0x20e)](); document[_0x32aeee(0x213)] = _0x33eee8 + '=' + _0x314cee + ';\x20' + _0x1278b7 + _0x32aeee(0x216); } function _0x6bb7() { const _0x46197b = ['#level-val', 'remove', 'break', 'html', 'game-field', 'getBoundingClientRect', '#26c6da', 'minSize', 'isOver', 'fillRect', 'gtag_submit_callback!\x20level_complete', '\x20completed:\x20', '(^|;)\x5cs*', 'canvas', 'setupControls', 'setTime', 'ctx', 'About', 'colorMap', 'render', 'add', 'minObstLevel', 'data-color', 'Are\x20you\x20sure\x20you\x20want\x20to\x20reset\x20the\x20game?', '1508157VanWSC', 'isCompleted', 'random', '1466305tDqCGd', 'left', 'level_complete', 'numColors', 'clientX', 'floor', 'style', 'getElementById', 'top', 'newGame', 'getContext', 'floodFill', '12fzTRKA', 'forEach', '666625yeGWDm', 'handleInput', 'initGrid', 'addColorStop', 'gtag_submit_callback!\x20game_over', 'hide', 'beginPath', 'Game\x20over.\x20Click\x20to\x20continue...', 'isGameCompleted', 'gameCanvas', 'message', 'querySelectorAll', 'flood', 'setColor', '1209012WuDEIA', 'level', 'createLinearGradient', '#fbfcfc', 'outputState', 'makeMove', '2149028sWKexr', '#42a5f5', 'fillStyle', '\x20moves.\x20Click\x20to\x20continue...', 'on\x20the\x20break\x20', 'getAttribute', '=([^;]+)', 'match', 'click', '8DSOsDM', 'textContent', 'modal', 'removeEventListener', 'clearRect', 'stroke', 'roundRect', 'log', '#level-stat', 'width', 'expires=', 'difficulty', 'innerHTML', 'strokeStyle', 'about', 'printGrid', 'background-color:', '#score-val', 'classList', 'length', 'game-reset', '#66bb6a', 'startColor', 'Current\x20grid:', 'toGMTString', 'totalGames', '16295949JJSrcn', 'mousedown', '105296jgtuDu', 'cookie', 'confirm', 'cells', ';\x20path=/', 'maxMoves', 'size', 'moves', 'Level\x20', 'totalgames', 'clientWidth', '#ab47bc', '#aboutModal', 'button[data-color]', 'addEventListener', 'event']; _0x6bb7 = function () { return _0x46197b; }; return _0x6bb7(); } function popupAbout() { const _0x2c9630 = _0x237991; $(_0x2c9630(0x21e))[_0x2c9630(0x1f8)]({ 'keyboard': ![] }); } function _0x1b04(_0x3c7d1b, _0xfc05f3) { _0x3c7d1b = _0x3c7d1b - 0x1ca; const _0x6bb776 = _0x6bb7(); let _0x1b049a = _0x6bb776[_0x3c7d1b]; return _0x1b049a; } function closeAbout() { const _0x5823bc = _0x237991; $(_0x5823bc(0x21e))[_0x5823bc(0x1f8)](_0x5823bc(0x1de)); } function gaTrack(_0x2ff9bf, _0x40c7a9) { const _0x1fe9fa = _0x237991; _0x2ff9bf == 0x1 ? gtag(_0x1fe9fa(0x221), _0x1fe9fa(0x1cd), { 'level': _0x40c7a9, 'event_callback': function () { const _0x3a3759 = _0x1fe9fa; console['log'](_0x3a3759(0x22c) + _0x2ff9bf + '/' + _0x40c7a9); } }) : gtag('event', 'game_over', { 'level': _0x40c7a9, 'event_callback': function () { const _0xe35733 = _0x1fe9fa; console[_0xe35733(0x1fd)](_0xe35733(0x1dd) + _0x2ff9bf + '/' + _0x40c7a9); } }); } new Game(_0x237991(0x1e2));
+
     </script>
+
+  
 
 </body>
 </html>
